@@ -9,11 +9,11 @@ MethylCalculation(start_classes, u, d, p, cell_cycle = 1)
 \arguments{
 \item{start_classes}{The START methylation classes}
 
-\item{u}{The paramater that desctibing the methylation probablity on CpG site}
+\item{u}{The paramater that describing the methylation probablity on CpG site}
 
-\item{d}{The paramater that desctibing the de-methylation probablity on 5mCpG site}
+\item{d}{The paramater that describing the de-methylation probablity on 5mCpG site}
 
-\item{p}{The paramater that desctibing the methylation probablity on semi-CpG site}
+\item{p}{The paramater that describing the methylation probablity on semi-CpG site}
 
 \item{cell_cycle}{The cell cycle times}
 

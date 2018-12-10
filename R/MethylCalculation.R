@@ -87,9 +87,9 @@ MethyClass2Mean <- function(x){
 #' @title "MethylCalculation"
 #' @description This .....
 #' @param start_classes The START methylation classes
-#' @param u The paramater that desctibing the methylation probablity on CpG site
-#' @param d The paramater that desctibing the de-methylation probablity on 5mCpG site
-#' @param p The paramater that desctibing the methylation probablity on semi-CpG site
+#' @param u The paramater that describing the methylation probablity on CpG site
+#' @param d The paramater that describing the de-methylation probablity on 5mCpG site
+#' @param p The paramater that describing the methylation probablity on semi-CpG site
 #' @param total The total genes when do the calculation
 #' @param loops The loop times for the calculation
 #' @param cell_cycle The cell cycle times
@@ -103,6 +103,8 @@ MethyClass2Mean <- function(x){
 #' @export MethylCalculation
 
 MethylCalculation <- function(start_classes,u,d,p,cell_cycle=1){
+	stopifnot(is.numeric(start_classes), is.vector(start_classes))
+	stopifnot(is.numeric(u), is.numeric(d), is.numeric(p), is.integer(cell_cycle))
 	if (u > 1||u < -1||d > 1||d < -1||p > 1||p < -1){
 		stop("The probablities shoud be a number in c(0,1)!\n\n")
 	}

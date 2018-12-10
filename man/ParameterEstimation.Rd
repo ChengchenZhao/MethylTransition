@@ -7,7 +7,17 @@
 ParameterEstimation(observation_matrix, iter = 50, cell_cycle = 1)
 }
 \arguments{
-\item{observation_matrix}{The START methylation classes}
+\item{observation_matrix}{The transition matrix(5X5) from start state to end state. \cr
+\tabular{cccccc}{
+    \tab start_class1 \tab start_class2 \tab start_class3 \tab start_class4 \tab start_class5\cr
+    end_class1 \tab a1 \tab b1 \tab c1 \tab d1 \tab e1\cr
+    end_class2 \tab a2 \tab b2 \tab c2 \tab d2 \tab e2\cr
+    end_class3 \tab a3 \tab b3 \tab c3 \tab d3 \tab e3\cr
+    end_class4 \tab a4 \tab b4 \tab c4 \tab d4 \tab e4\cr
+    end_class5 \tab a5 \tab b5 \tab c5 \tab d5 \tab e5
+}\cr
+# observation_matrix[1,1](a1) is the ratio of start_class1 to end_class1,observation_matrix[1,2](b1) is the ratio of start_class2 to end_class1 and so on\cr
+# observation_matrix[2,1](a2) is the ratio of start_class1 to end_class2,observation_matrix[2,2](b2) is the ratio of start_class2 to end_class2 and so on\cr}
 
 \item{iter}{the iteration times of the parameter estimation using newton's method}
 
