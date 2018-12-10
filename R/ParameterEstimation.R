@@ -1,15 +1,8 @@
-#' @title "ParameterEstimation"
-#' @description This .....
-#' @param observation_matrix The START methylation classes
-#' @param iter the iteration times of the parameter estimation using newton's method
-#' @param cell_cycle The cell cycle times
-#' @return end_classes The END methylation classes
-#' @return end_class_mean The average methylation level after cell division.
-#' @examples ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
-#' @export ParameterEstimation
-
-library(numDeriv)
-newton <- function(func = objfun, x0, tol = 1e-5, n.max = 100,...){
+################################################################################################
+###################################    Built-in functions    ###################################
+################################################################################################
+NewtonsMethod <- function(func = objfun, x0, tol = 1e-5, n.max = 100,...){
+	library(numDeriv)
 	x <- x0
 	g <- grad(func, x, ...)
 	h <- hessian(func, x, ...)
@@ -22,7 +15,7 @@ newton <- function(func = objfun, x0, tol = 1e-5, n.max = 100,...){
 		n <- n+1
 	}
 	if(n == n.max){
-		# cat('newton failed to converge\n')
+		# cat('NewtonsMethod failed to converge\n')
 		return(x)
 	}
 	return(x)
@@ -69,11 +62,30 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 	if (cell_cycle_times==1){
 		return(as.vector(t(observation_matrix)))
 	}else{
-		library(pracma)
-		tmp <- rootm(observation_matrix,p=cell_cycle_times,kmax=20)$B
+		tmp <- expm(1/cell_cycle_times*logm(observation_matrix))
 		return(as.vector(t(tmp)))
 	}
 }
+
+################################################################################################
+###################################     Library functions    ###################################
+################################################################################################
+
+#' @title "ParameterEstimation"
+#' @description This .....
+#' @param observation_matrix The START methylation classes
+#' @param iter the iteration times of the parameter estimation using newton's method
+#' @param cell_cycle The cell cycle times
+#' @return end_classes The END methylation classes
+#' @return end_class_mean The average methylation level after cell division.
+#' @details This ...
+#' @references This ...
+#' @examples ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
+#' @examples observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,0.0497,0.5873,0.1887,0.0344,0.0149,0.0096,0.2381,0.4151,0.0653,0.0876,0.0019,0.0635,0.3396,0.6151,0.253,0,0.0159,0.0189,0.2852,0.6444),5,5,byrow=T)
+#' ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
+#' ParameterEstimation(observation_matrix,iter=100,cell_cycle=2)
+#' ParameterEstimation(observation_matrix,iter=100,cell_cycle=10)
+#' @export ParameterEstimation
 
 ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 	observe <- TransitionMatrixCellCycle(observation_matrix,cell_cycle)
@@ -87,7 +99,7 @@ ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 			cat(paste("\t",i," iterations...\n",sep=""))
 		}
 		x0 <- runif(3, min=0, max=1)
-		tryCatch({y <- newton(func=CostFunction, x0=x0,observe=observe);
+		tryCatch({y <- NewtonsMethod(func=CostFunction, x0=x0,observe=observe);
 		para_maxtrix <- rbind(para_maxtrix,y);},
 		error=function(e){i})
 	}
@@ -107,7 +119,3 @@ ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 	names(selected_parameter) <- c("DeNovoMethylation_u","DeMethylation_d","SemiMethylation_p")
 	return(selected_parameter)
 }
-
-# observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,0.0497,0.5873,0.1887,0.0344,0.0149,0.0096,0.2381,0.4151,0.0653,0.0876,0.0019,0.0635,0.3396,0.6151,0.253,0,0.0159,0.0189,0.2852,0.6444),5,5,byrow=T)
-# ParameterEstimation(observation_matrix,iter=50,cell_cycle=2)
-# ParameterEstimation(observation_matrix,iter=100,cell_cycle=2)

@@ -1,17 +1,6 @@
-#' @title "MethylCalculation"
-#' @description This .....
-#' @param start_classes The START methylation classes
-#' @param u The paramater that desctibing the methylation probablity on CpG site
-#' @param d The paramater that desctibing the de-methylation probablity on 5mCpG site
-#' @param p The paramater that desctibing the methylation probablity on semi-CpG site
-#' @param total The total genes when do the calculation
-#' @param loops The loop times for the calculation
-#' @param cell_cycle The cell cycle times
-#' @return end_classes The END methylation classes
-#' @return end_class_mean The average methylation level after cell division.
-#' @examples MethylCalculation(start_classes,u,d,p)
-#' @export MethylCalculation
-
+################################################################################################
+###################################    Built-in functions    ###################################
+################################################################################################
 MethylationClassSummary <- function(x){
 	cutoff_1 <- 1/8
 	cutoff_2 <- 3/8
@@ -90,6 +79,28 @@ MethyClass2Mean <- function(x){
 		return(x[1]*0+x[2]*0.25+x[3]*0.5+x[4]*0.75+x[5]*1)
 	}
 }
+
+################################################################################################
+###################################     Library functions    ###################################
+################################################################################################
+
+#' @title "MethylCalculation"
+#' @description This .....
+#' @param start_classes The START methylation classes
+#' @param u The paramater that desctibing the methylation probablity on CpG site
+#' @param d The paramater that desctibing the de-methylation probablity on 5mCpG site
+#' @param p The paramater that desctibing the methylation probablity on semi-CpG site
+#' @param total The total genes when do the calculation
+#' @param loops The loop times for the calculation
+#' @param cell_cycle The cell cycle times
+#' @return end_classes The END methylation classes
+#' @return end_class_mean The average methylation level after cell division.
+#' @details This ...
+#' @references This ...
+#' @examples MethylCalculation(start_classes,u,d,p)
+#' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=1)
+#' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=10)
+#' @export MethylCalculation
 
 MethylCalculation <- function(start_classes,u,d,p,cell_cycle=1){
 	if (u > 1||u < -1||d > 1||d < -1||p > 1||p < -1){
