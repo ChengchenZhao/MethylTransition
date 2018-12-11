@@ -62,6 +62,7 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 	if (cell_cycle_times==1){
 		return(as.vector(t(observation_matrix)))
 	}else{
+		library(pracma)
 		tmp <- expm(1/cell_cycle_times*logm(observation_matrix))
 		return(as.vector(t(tmp)))
 	}
@@ -86,12 +87,12 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 #' 	# observation_matrix[2,1](a2) is the ratio of start_class1 to end_class2,observation_matrix[2,2](b2) is the ratio of start_class2 to end_class2 and so on\cr
 #' @param iter the iteration times of the parameter estimation using newton's method
 #' @param cell_cycle The cell cycle times
-#' @return end_classes The END methylation classes
-#' @return end_class_mean The average methylation level after cell division.
+#' @return TheEstimatedParameters The estimated parameters using the maximum likelihood estimation and Newton's method.
+#' @return ThePredictedMatrix The calculated transition matrix using the estimated parameters.
 #' @details This ...
 #' @references This ...
-#' @examples ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
 #' @examples observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,0.0497,0.5873,0.1887,0.0344,0.0149,0.0096,0.2381,0.4151,0.0653,0.0876,0.0019,0.0635,0.3396,0.6151,0.253,0,0.0159,0.0189,0.2852,0.6444),5,5,byrow=T)
+#' ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
 #' ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
 #' ParameterEstimation(observation_matrix,iter=100,cell_cycle=2)
 #' ParameterEstimation(observation_matrix,iter=100,cell_cycle=10)
@@ -99,7 +100,7 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 
 ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 	stopifnot(is.numeric(observation_matrix), is.matrix(observation_matrix))
-	stopifnot(is.numeric(iter), is.integer(cell_cycle))
+	stopifnot(is.numeric(iter), is.numeric(cell_cycle))
 	observe <- TransitionMatrixCellCycle(observation_matrix,cell_cycle)
 	para_maxtrix <- c()
 	cat("\n")
@@ -129,5 +130,9 @@ ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 		selected_parameter <- round(selected_parameter_matrix,6)
 	}
 	names(selected_parameter) <- c("DeNovoMethylation_u","DeMethylation_d","SemiMethylation_p")
-	return(selected_parameter)
+	predicted_matrix <- MethylationTransMatrix(selected_parameter[1],selected_parameter[2],selected_parameter[3])
+	colnames(predicted_matrix) <- c("start_class1","start_class2","start_class3","start_class4","start_class5")
+	rownames(predicted_matrix) <- c("end_class1","end_class2","end_class3","end_class4","end_class5")
+	cat("\n")
+	return(list("TheEstimatedParameters"=selected_parameter,"ThePredictedMatrix"=predicted_matrix))
 }

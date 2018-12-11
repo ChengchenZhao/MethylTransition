@@ -35,8 +35,8 @@ This .....
 This ...
 }
 \examples{
-ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
 observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,0.0497,0.5873,0.1887,0.0344,0.0149,0.0096,0.2381,0.4151,0.0653,0.0876,0.0019,0.0635,0.3396,0.6151,0.253,0,0.0159,0.0189,0.2852,0.6444),5,5,byrow=T)
+ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
 ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
 ParameterEstimation(observation_matrix,iter=100,cell_cycle=2)
 ParameterEstimation(observation_matrix,iter=100,cell_cycle=10)

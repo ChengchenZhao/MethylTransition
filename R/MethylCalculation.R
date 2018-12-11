@@ -93,8 +93,8 @@ MethyClass2Mean <- function(x){
 #' @param total The total genes when do the calculation
 #' @param loops The loop times for the calculation
 #' @param cell_cycle The cell cycle times
-#' @return end_classes The END methylation classes
-#' @return end_class_mean The average methylation level after cell division.
+#' @return EndClasses The END methylation classes
+#' @return MeanMethylationLevel The average methylation level after [n] cell cycle(s).
 #' @details This ...
 #' @references This ...
 #' @examples MethylCalculation(start_classes,u,d,p)
@@ -116,5 +116,6 @@ MethylCalculation <- function(start_classes,u,d,p,cell_cycle=1){
 	cat("\tMethylation Calculation\n")
 	cat("\n")
 	cat(paste("It calculated the ratio of each methylation states after ",cell_cycle ," cell cycle(s).\n"))
+	cat("\n")
 	return(list("EndClasses"=start_classes,"MeanMethylationLevel"=end_mean))
 }
