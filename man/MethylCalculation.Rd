@@ -4,10 +4,10 @@
 \alias{MethylCalculation}
 \title{"MethylCalculation"}
 \usage{
-MethylCalculation(start_classes, u, d, p, cell_cycle = 1)
+MethylCalculation(original_classes, u, d, p, cell_cycle = 1)
 }
 \arguments{
-\item{start_classes}{The START methylation classes}
+\item{original_classes}{The original methylation classes}
 
 \item{u}{The paramater that describing the methylation probablity on CpG site}
 
@@ -22,21 +22,23 @@ MethylCalculation(start_classes, u, d, p, cell_cycle = 1)
 \item{loops}{The loop times for the calculation}
 }
 \value{
-end_classes The END methylation classes
+terminational_classes The terminational methylation classes
 
-end_class_mean The average methylation level after cell division.
+average_methylation_level The average methylation level after [n] cell cycle(s).
 }
 \description{
-This .....
+Calculate the ratio of each methylation class after n cell cycle(s).
 }
 \details{
-This ...
+The transition matrix of this model describes the changes of DNA methylation during one cell cycle in three steps:
+passive demethylation by DNA replication, active DNA methylation changes affected by DNA methylation-modifying enzymes
+and DNA methylation combinations during homologous recombination.
 }
 \examples{
-MethylCalculation(start_classes,u,d,p)
+MethylCalculation(original_classes,u,d,p)
 MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=1)
 MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=10)
 }
 \references{
-This ...
+.
 }

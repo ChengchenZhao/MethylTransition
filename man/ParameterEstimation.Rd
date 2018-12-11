@@ -24,15 +24,17 @@ ParameterEstimation(observation_matrix, iter = 50, cell_cycle = 1)
 \item{cell_cycle}{The cell cycle times}
 }
 \value{
-end_classes The END methylation classes
+TheEstimatedParameters The estimated parameters using the maximum likelihood estimation and the Newton-Raphson method.
 
-end_class_mean The average methylation level after cell division.
+ThePredictedMatrix The calculated transition matrix using the estimated parameters.
 }
 \description{
-This .....
+Estimated the parameters that represent the probabilities of three active DNA methylation change types during n cell cycle(s).
 }
 \details{
-This ...
+The transition matrix of this model describes the changes of DNA methylation during one cell cycle in three steps:
+passive demethylation by DNA replication, active DNA methylation changes affected by DNA methylation-modifying enzymes
+and DNA methylation combinations during homologous recombination.
 }
 \examples{
 observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,0.0497,0.5873,0.1887,0.0344,0.0149,0.0096,0.2381,0.4151,0.0653,0.0876,0.0019,0.0635,0.3396,0.6151,0.253,0,0.0159,0.0189,0.2852,0.6444),5,5,byrow=T)
@@ -42,5 +44,5 @@ ParameterEstimation(observation_matrix,iter=100,cell_cycle=2)
 ParameterEstimation(observation_matrix,iter=100,cell_cycle=10)
 }
 \references{
-This ...
+.
 }
