@@ -1,11 +1,13 @@
 Package: MethylTransition
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
+Title: Estimated DNA Methylation Parameters and Calculate Methylation Classes after n Cell Cycle(s)
+Version: 1.0.0
 Author: Chengchen Zhao
 Maintainer: Chengchen Zhao <cczhao@tongji.edu.cn>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: (the description of the model)
+	This packages contains two main functions: ParameterEstimation() and MethylCalculation().
+	ParameterEstimation() is a function to estimated the parameters that represent the probabilities of three active DNA methylation change types during n cell cycle(s).
+	MethylCalculation() is a function to calculate the ratio of each methylation class after n cell cycle(s).
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

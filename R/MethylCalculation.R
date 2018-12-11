@@ -85,37 +85,39 @@ MethyClass2Mean <- function(x){
 ################################################################################################
 
 #' @title "MethylCalculation"
-#' @description This .....
-#' @param start_classes The START methylation classes
+#' @description Calculate the ratio of each methylation class after n cell cycle(s).
+#' @param original_classes The original methylation classes
 #' @param u The paramater that describing the methylation probablity on CpG site
 #' @param d The paramater that describing the de-methylation probablity on 5mCpG site
 #' @param p The paramater that describing the methylation probablity on semi-CpG site
 #' @param total The total genes when do the calculation
 #' @param loops The loop times for the calculation
 #' @param cell_cycle The cell cycle times
-#' @return EndClasses The END methylation classes
-#' @return MeanMethylationLevel The average methylation level after [n] cell cycle(s).
-#' @details This ...
-#' @references This ...
-#' @examples MethylCalculation(start_classes,u,d,p)
+#' @return terminational_classes The terminational methylation classes
+#' @return average_methylation_level The average methylation level after [n] cell cycle(s).
+#' @details The transition matrix of this model describes the changes of DNA methylation during one cell cycle in three steps:
+#' passive demethylation by DNA replication, active DNA methylation changes affected by DNA methylation-modifying enzymes
+#' and DNA methylation combinations during homologous recombination.
+#' @references .
+#' @examples MethylCalculation(original_classes,u,d,p)
 #' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=1)
 #' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=10)
 #' @export MethylCalculation
 
-MethylCalculation <- function(start_classes,u,d,p,cell_cycle=1){
-	stopifnot(is.numeric(start_classes), is.vector(start_classes))
+MethylCalculation <- function(original_classes,u,d,p,cell_cycle=1){
+	stopifnot(is.numeric(original_classes), is.vector(original_classes))
 	stopifnot(is.numeric(u), is.numeric(d), is.numeric(p), is.integer(cell_cycle))
 	if (u > 1||u < -1||d > 1||d < -1||p > 1||p < -1){
 		stop("The probablities shoud be a number in c(0,1)!\n\n")
 	}
 	for (i in seq(cell_cycle)){
-		start_classes <- PredictionMethylationClass(start_classes,u,d,p)
+		original_classes <- PredictionMethylationClass(original_classes,u,d,p)
 	}
-	end_mean <- MethyClass2Mean(start_classes)
+	end_mean <- MethyClass2Mean(original_classes)
 	cat("\n")
 	cat("\tMethylation Calculation\n")
 	cat("\n")
 	cat(paste("It calculated the ratio of each methylation states after ",cell_cycle ," cell cycle(s).\n"))
 	cat("\n")
-	return(list("EndClasses"=start_classes,"MeanMethylationLevel"=end_mean))
+	return(list("terminational_classes"=original_classes,"average_methylation_level"=end_mean))
 }
