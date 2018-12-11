@@ -7,26 +7,27 @@
 ParameterEstimation(observation_matrix, iter = 50, cell_cycle = 1)
 }
 \arguments{
-\item{observation_matrix}{The transition matrix(5X5) from start state to end state. \cr
+\item{observation_matrix}{The transition matrix(5X5) from the original state to the terminational state. \cr
 \tabular{cccccc}{
-    \tab start_class1 \tab start_class2 \tab start_class3 \tab start_class4 \tab start_class5\cr
-    end_class1 \tab a1 \tab b1 \tab c1 \tab d1 \tab e1\cr
-    end_class2 \tab a2 \tab b2 \tab c2 \tab d2 \tab e2\cr
-    end_class3 \tab a3 \tab b3 \tab c3 \tab d3 \tab e3\cr
-    end_class4 \tab a4 \tab b4 \tab c4 \tab d4 \tab e4\cr
-    end_class5 \tab a5 \tab b5 \tab c5 \tab d5 \tab e5
+    \tab original_class1 \tab original_class2 \tab original_class3 \tab original_class4 \tab original_class5\cr
+    terminational_class1 \tab a1 \tab b1 \tab c1 \tab d1 \tab e1\cr
+    terminational_class2 \tab a2 \tab b2 \tab c2 \tab d2 \tab e2\cr
+    terminational_class3 \tab a3 \tab b3 \tab c3 \tab d3 \tab e3\cr
+    terminational_class4 \tab a4 \tab b4 \tab c4 \tab d4 \tab e4\cr
+    terminational_class5 \tab a5 \tab b5 \tab c5 \tab d5 \tab e5
 }\cr
-# observation_matrix[1,1](a1) is the ratio of start_class1 to end_class1,observation_matrix[1,2](b1) is the ratio of start_class2 to end_class1 and so on\cr
-# observation_matrix[2,1](a2) is the ratio of start_class1 to end_class2,observation_matrix[2,2](b2) is the ratio of start_class2 to end_class2 and so on\cr}
+# observation_matrix[1,1](a1) is the ratio of original_class1 to terminational_class1,observation_matrix[1,2](b1) is the ratio of original_class2 to terminational_class1 and so on\cr
+# observation_matrix[2,1](a2) is the ratio of original_class1 to terminational_class2,observation_matrix[2,2](b2) is the ratio of original_class2 to terminational_class2 and so on\cr
+# The sum of the ratio that original_class1 change to 5 classes should be 1. That is a1+a2+a3+a4+a5=1.\cr}
 
-\item{iter}{the iteration times of the parameter estimation using newton's method}
+\item{iter}{The iteration times of the parameter estimation using the Newton-Raphson method with different initial guesses.}
 
-\item{cell_cycle}{The cell cycle times}
+\item{cell_cycle}{The cell cycle times from the original state to the terminational state.}
 }
 \value{
-TheEstimatedParameters The estimated parameters using the maximum likelihood estimation and the Newton-Raphson method.
+estimated_parameters The estimated parameters using the maximum likelihood estimation and the Newton-Raphson method.
 
-ThePredictedMatrix The calculated transition matrix using the estimated parameters.
+predicted_matrix The calculated transition matrix using the estimated parameters.
 }
 \description{
 Estimated the parameters that represent the probabilities of three active DNA methylation change types during n cell cycle(s).
@@ -37,11 +38,19 @@ passive demethylation by DNA replication, active DNA methylation changes affecte
 and DNA methylation combinations during homologous recombination.
 }
 \examples{
+# Let's start from a transtion matrix
 observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,0.0497,0.5873,0.1887,0.0344,0.0149,0.0096,0.2381,0.4151,0.0653,0.0876,0.0019,0.0635,0.3396,0.6151,0.253,0,0.0159,0.0189,0.2852,0.6444),5,5,byrow=T)
-ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
-ParameterEstimation(observation_matrix,iter=50,cell_cycle=1)
-ParameterEstimation(observation_matrix,iter=100,cell_cycle=2)
-ParameterEstimation(observation_matrix,iter=100,cell_cycle=10)
+
+# The DNA methylation states change from original state to the terminational state after 1 cell cycle.
+ParameterEstimation(observation_matrix,iter=30,cell_cycle=1)
+
+# The DNA methylation states change from original state to the terminational state after 2 cell cycle.
+# ParameterEstimation(observation_matrix,iter=1,cell_cycle=2)
+# if this function was not successful to estimated the function, you may try more iterations with different initial guesses
+ParameterEstimation(observation_matrix,iter=50,cell_cycle=2)
+
+# The DNA methylation states change from original state to the terminational state after 30 cell cycle.
+ParameterEstimation(observation_matrix,iter=50,cell_cycle=30)
 }
 \references{
 .
