@@ -7,7 +7,7 @@
 ParameterEstimation(observation_matrix, iter = 50, cell_cycle = 1)
 }
 \arguments{
-\item{observation_matrix}{The transition matrix(5X5) from the original state to the terminational state. \cr
+\item{observation_matrix}{The transition matrix(5×5) from the original state to the terminational state. \cr
 \tabular{cccccc}{
     \tab original_class1 \tab original_class2 \tab original_class3 \tab original_class4 \tab original_class5\cr
     terminational_class1 \tab a1 \tab b1 \tab c1 \tab d1 \tab e1\cr

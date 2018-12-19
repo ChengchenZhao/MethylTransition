@@ -74,7 +74,7 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 
 #' @title "ParameterEstimation"
 #' @description Estimated the parameters that represent the probabilities of three active DNA methylation change types during n cell cycle(s).
-#' @param observation_matrix The transition matrix(5X5) from the original state to the terminational state. \cr
+#' @param observation_matrix The transition matrix(5×5) from the original state to the terminational state. \cr
 #' 	\tabular{cccccc}{
 #' 		\tab original_class1 \tab original_class2 \tab original_class3 \tab original_class4 \tab original_class5\cr
 #' 		terminational_class1 \tab a1 \tab b1 \tab c1 \tab d1 \tab e1\cr
