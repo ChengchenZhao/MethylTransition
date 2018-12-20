@@ -74,15 +74,15 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 
 #' @title "ParameterEstimation"
 #' @description Estimated the parameters that represent the probabilities of three active DNA methylation change types during n cell cycle(s).
-#' @param observation_matrix The transition matrix(5×5) from the original state to the terminational state. \cr
+#' @param observation_matrix The transition matrix(\eqn{5 \times 5}) from the original state to the terminational state. \cr
 #' 	\tabular{cccccc}{
 #' 		\tab original_class1 \tab original_class2 \tab original_class3 \tab original_class4 \tab original_class5\cr
 #' 		terminational_class1 \tab a1 \tab b1 \tab c1 \tab d1 \tab e1\cr
 #' 		terminational_class2 \tab a2 \tab b2 \tab c2 \tab d2 \tab e2\cr
 #' 		terminational_class3 \tab a3 \tab b3 \tab c3 \tab d3 \tab e3\cr
 #' 		terminational_class4 \tab a4 \tab b4 \tab c4 \tab d4 \tab e4\cr
-#' 		terminational_class5 \tab a5 \tab b5 \tab c5 \tab d5 \tab e5
-#' 	}\cr
+#' 		terminational_class5 \tab a5 \tab b5 \tab c5 \tab d5 \tab e5\cr
+#' 	}
 #' 	# observation_matrix[1,1](a1) is the ratio of original_class1 to terminational_class1,observation_matrix[1,2](b1) is the ratio of original_class2 to terminational_class1 and so on\cr
 #' 	# observation_matrix[2,1](a2) is the ratio of original_class1 to terminational_class2,observation_matrix[2,2](b2) is the ratio of original_class2 to terminational_class2 and so on\cr
 #' 	# The sum of the ratio that original_class1 change to 5 classes should be 1. That is a1+a2+a3+a4+a5=1.\cr
@@ -101,16 +101,16 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 #' 		after_replication(0-1) \tab \eqn{0} \tab \eqn{1-a} \tab \eqn{0} \tab \eqn{1-a} \cr
 #' 		after_replication(1-0) \tab \eqn{0} \tab \eqn{0} \tab \eqn{0} \tab \eqn{a} \cr
 #' 		after_replication(1-1) \tab \eqn{0} \tab \eqn{0} \tab \eqn{0} \tab \eqn{0} \cr
-#' 	}\cr
+#' 	}
 #' 	among this matrix ,\eqn{a} is the methylation change probability with DNA replication and equal to 0.5.
 #' 	Then the transition matrix after active DNA methylation changes would be:
 #' 	\tabular{cccccc}{
 #' 		\tab after_replication(0-0) \tab after_replication(0-1) \tab after_replication(1-0) \tab after_replication(1-1) \cr
-#' 		after_enzymemodifying(0-0) \tab \eqn{(1-u)×(1-u)} \tab \eqn{(1-u-p+u×p)×d} \tab \eqn{d×(1-u-p+u×p)} \tab \eqn{0} \cr
-#' 		after_enzymemodifying(0-1) \tab \eqn{u×(1-u)} \tab \eqn{(1-u-p+u×p)×(1-d)} \tab \eqn{d×(u+p-u×p)} \tab \eqn{0} \cr
-#' 		after_enzymemodifying(1-0) \tab \eqn{u×(1-u)} \tab \eqn{(u+p-u×p)×d} \tab \eqn{(1-d)×(1-u-p+u×p)} \tab \eqn{0} \cr
-#' 		after_enzymemodifying(1-1) \tab \eqn{u×u} \tab \eqn{(u+p-u×p)×(1-d)} \tab \eqn{(1-d)×(u+p-u×p)} \tab \eqn{1} \cr
-#' 	}\cr
+#' 		after_enzymemodifying(0-0) \tab \eqn{(1-u) \times (1-u)} \tab \eqn{(1-u-p+u \times p) \times d} \tab \eqn{d \times (1-u-p+u \times p)} \tab \eqn{0} \cr
+#' 		after_enzymemodifying(0-1) \tab \eqn{u \times (1-u)} \tab \eqn{(1-u-p+u \times p) \times (1-d)} \tab \eqn{d \times (u+p-u \times p)} \tab \eqn{0} \cr
+#' 		after_enzymemodifying(1-0) \tab \eqn{u \times (1-u)} \tab \eqn{(u+p-u \times p) \times d} \tab \eqn{(1-d) \times (1-u-p+u \times p)} \tab \eqn{0} \cr
+#' 		after_enzymemodifying(1-1) \tab \eqn{u \times u} \tab \eqn{(u+p-u \times p) \times (1-d)} \tab \eqn{(1-d) \times (u+p-u \times p)} \tab \eqn{1} \cr
+#' 	}
 #' 	The paramater \eqn{u} described the methylation probablity on CpG site.
 #' 	The paramater \eqn{d} described the de-methylation probablity on 5mCpG site.
 #' 	The paramater \eqn{p} described the methylation probablity on semi-CpG site.
@@ -124,36 +124,36 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 #' 		terminational_class2(1/4) \tab \eqn{x_{2,1}} \tab \eqn{x_{2,2}} \tab \eqn{x_{2,3}} \tab \eqn{x_{2,4}} \tab \eqn{x_{2,5}}\cr
 #' 		terminational_class3(1/2) \tab \eqn{x_{3,1}} \tab \eqn{x_{3,2}} \tab \eqn{x_{3,3}} \tab \eqn{x_{3,4}} \tab \eqn{x_{3,5}}\cr
 #' 		terminational_class4(3/4) \tab \eqn{x_{4,1}} \tab \eqn{x_{4,2}} \tab \eqn{x_{4,3}} \tab \eqn{x_{4,4}} \tab \eqn{x_{4,5}}\cr
-#' 		terminational_class5(1) \tab \eqn{x_{5,1}} \tab \eqn{x_{5,2}} \tab \eqn{x_{5,3}} \tab \eqn{x_{5,4}} \tab \eqn{x_{5,5}}
-#' 	}\cr
-#' 	and \deqn{x_{1,1}=t_{1,1}×t_{1,1}}
-#' \deqn{x_{1,1}=t_{{,1},1}×t_{{,1},1}}
-#' \deqn{x_{1,2}=1/4×(t_{1,1}×t_{1,2}+t_{1,1}×t_{1,3}+t_{1,2}×t_{1,1}+t_{1,3}×t_{1,1})}
-#' \deqn{x_{1,3}=1/6×(t_{1,1}×t_{1,4}+t_{1,2}×t_{1,2}+t_{1,2}×t_{1,3}+t_{1,3}×t_{1,2}+t_{1,3}×t_{1,3}+t_{1,4}×t_{1,1})}
-#' \deqn{x_{1,4}=1/4×(t_{1,2}×t_{1,4}+t_{1,3}×t_{1,4}+t_{1,4}×t_{1,2}+t_{1,4}×t_{1,3})}
-#' \deqn{x_{1,5}=t_{1,4}×t_{1,4}}
-#' \deqn{x_{2,1}=t_{1,1}×t_{2,1}+t_{1,1}×t_{3,1}+t_{2,1}×t_{1,1}+t_{3,1}×t_{1,1}}
-#' \deqn{x_{2,2}=1/4×(t_{1,1}×t_{2,2}+t_{1,1}×t_{2,3}+t_{1,2}×t_{2,1}+t_{1,3}×t_{2,1}+t_{1,1}×t_{3,2}+t_{1,1}×t_{3,3}+t_{1,2}×t_{3,1}+t_{1,3}×t_{3,1}+t_{2,1}×t_{1,2}+t_{2,1}×t_{1,3}+t_{2,2}×t_{1,1}+t_{2,3}×t_{1,1}+t_{3,1}×t_{1,2}+t_{3,1}×t_{1,3}+t_{3,2}×t_{1,1}+t_{3,3}×t_{1,1})}
-#' \deqn{x_{2,3}=1/6×(t_{1,1}×t_{2,4}+t_{1,2}×t_{2,2}+t_{1,2}×t_{2,3}+t_{1,3}×t_{2,2}+t_{1,3}×t_{2,3}+t_{1,4}×t_{2,1}+t_{1,1}×t_{3,4}+t_{1,2}×t_{3,2}+t_{1,2}×t_{3,3}+t_{1,3}×t_{3,2}+t_{1,3}×t_{3,3}+t_{1,4}×t_{3,1}+t_{2,1}×t_{1,4}+t_{2,2}×t_{1,2}+t_{2,2}×t_{1,3}+t_{2,3}×t_{1,2}+t_{2,3}×t_{1,3}+t_{2,4}×t_{1,1}+t_{3,1}×t_{1,4}+t_{3,2}×t_{1,2}+t_{3,2}×t_{1,3}+t_{3,3}×t_{1,2}+t_{3,3}×t_{1,3}+t_{3,4}×t_{1,1})}
-#' \deqn{x_{2,4}=1/4×(t_{1,2}×t_{2,4}+t_{1,3}×t_{2,4}+t_{1,4}×t_{2,2}+t_{1,4}×t_{2,3}+t_{1,2}×t_{3,4}+t_{1,3}×t_{3,4}+t_{1,4}×t_{3,2}+t_{1,4}×t_{3,3}+t_{2,2}×t_{1,4}+t_{2,3}×t_{1,4}+t_{2,4}×t_{1,2}+t_{2,4}×t_{1,3}+t_{3,2}×t_{1,4}+t_{3,3}×t_{1,4}+t_{3,4}×t_{1,2}+t_{3,4}×t_{1,3})}
-#' \deqn{x_{2,5}=t_{1,4}×t_{2,4}+t_{1,4}×t_{3,4}+t_{2,4}×t_{1,4}+t_{3,4}×t_{1,4}}
-#' \deqn{x_{3,1}=t_{1,1}×t_{4,1}+t_{2,1}×t_{2,1}+t_{2,1}×t_{3,1}+t_{3,1}×t_{2,1}+t_{3,1}×t_{3,1}+t_{4,1}×t_{1,1}}
-#' \deqn{x_{3,2}=1/4×(t_{1,1}×t_{4,2}+t_{1,1}×t_{4,3}+t_{1,2}×t_{4,1}+t_{1,3}×t_{4,1}+t_{2,1}×t_{2,2}+t_{2,1}×t_{2,3}+t_{2,2}×t_{2,1}+t_{2,3}×t_{2,1}+t_{2,1}×t_{3,2}+t_{2,1}×t_{3,3}+t_{2,2}×t_{3,1}+t_{2,3}×t_{3,1}+t_{3,1}×t_{2,2}+t_{3,1}×t_{2,3}+t_{3,2}×t_{2,1}+t_{3,3}×t_{2,1}+t_{3,1}×t_{3,2}+t_{3,1}×t_{3,3}+t_{3,2}×t_{3,1}+t_{3,3}×t_{3,1}+t_{4,1}×t_{1,2}+t_{4,1}×t_{1,3}+t_{4,2}×t_{1,1}+t_{4,3}×t_{1,1})}
-#' \deqn{x_{3,3}=1/6×(t_{1,1}×t_{4,4}+t_{1,2}×t_{4,2}+t_{1,2}×t_{4,3}+t_{1,3}×t_{4,2}+t_{1,3}×t_{4,3}+t_{1,4}×t_{4,1}+t_{2,1}×t_{2,4}+t_{2,2}×t_{2,2}+t_{2,2}×t_{2,3}+t_{2,3}×t_{2,2}+t_{2,3}×t_{2,3}+t_{2,4}×t_{2,1}+t_{2,1}×t_{3,4}+t_{2,2}×t_{3,2}+t_{2,2}×t_{3,3}+t_{2,3}×t_{3,2}+t_{2,3}×t_{3,3}+t_{2,4}×t_{3,1}+t_{3,1}×t_{2,4}+t_{3,2}×t_{2,2}+t_{3,2}×t_{2,3}+t_{3,3}×t_{2,2}+t_{3,3}×t_{2,3}+t_{3,4}×t_{2,1}+t_{3,1}×t_{3,4}+t_{3,2}×t_{3,2}+t_{3,2}×t_{3,3}+t_{3,3}×t_{3,2}+t_{3,3}×t_{3,3}+t_{3,4}×t_{3,1}+t_{4,1}×t_{1,4}+t_{4,2}×t_{1,2}+t_{4,2}×t_{1,3}+t_{4,3}×t_{1,2}+t_{4,3}×t_{1,3}+t_{4,4}×t_{1,1})}
-#' \deqn{x_{3,4}=1/4×(t_{1,2}×t_{4,4}+t_{1,3}×t_{4,4}+t_{1,4}×t_{4,2}+t_{1,4}×t_{4,3}+t_{2,2}×t_{2,4}+t_{2,3}×t_{2,4}+t_{2,4}×t_{2,2}+t_{2,4}×t_{2,3}+t_{2,2}×t_{3,4}+t_{2,3}×t_{3,4}+t_{2,4}×t_{3,2}+t_{2,4}×t_{3,3}+t_{3,2}×t_{2,4}+t_{3,3}×t_{2,4}+t_{3,4}×t_{2,2}+t_{3,4}×t_{2,3}+t_{3,2}×t_{3,4}+t_{3,3}×t_{3,4}+t_{3,4}×t_{3,2}+t_{3,4}×t_{3,3}+t_{4,2}×t_{1,4}+t_{4,3}×t_{1,4}+t_{4,4}×t_{1,2}+t_{4,4}×t_{1,3})}
-#' \deqn{x_{3,5}=t_{1,4}×t_{4,4}+t_{2,4}×t_{2,4}+t_{2,4}×t_{3,4}+t_{3,4}×t_{2,4}+t_{3,4}×t_{3,4}+t_{4,4}×t_{1,4}}
-#' \deqn{x_{4,1}=t_{2,1}×t_{4,1}+t_{3,1}×t_{4,1}+t_{4,1}×t_{2,1}+t_{4,1}×t_{3,1}}
-#' \deqn{x_{4,2}=1/4×(t_{2,1}×t_{4,2}+t_{2,1}×t_{4,3}+t_{2,2}×t_{4,1}+t_{2,3}×t_{4,1}+t_{3,1}×t_{4,2}+t_{3,1}×t_{4,3}+t_{3,2}×t_{4,1}+t_{3,3}×t_{4,1}+t_{4,1}×t_{2,2}+t_{4,1}×t_{2,3}+t_{4,2}×t_{2,1}+t_{4,3}×t_{2,1}+t_{4,1}×t_{3,2}+t_{4,1}×t_{3,3}+t_{4,2}×t_{3,1}+t_{4,3}×t_{3,1})}
-#' \deqn{x_{4,3}=1/6×(t_{2,1}×t_{4,4}+t_{2,2}×t_{4,2}+t_{2,2}×t_{4,3}+t_{2,3}×t_{4,2}+t_{2,3}×t_{4,3}+t_{2,4}×t_{4,1}+t_{3,1}×t_{4,4}+t_{3,2}×t_{4,2}+t_{3,2}×t_{4,3}+t_{3,3}×t_{4,2}+t_{3,3}×t_{4,3}+t_{3,4}×t_{4,1}+t_{4,1}×t_{2,4}+t_{4,2}×t_{2,2}+t_{4,2}×t_{2,3}+t_{4,3}×t_{2,2}+t_{4,3}×t_{2,3}+t_{4,4}×t_{2,1}+t_{4,1}×t_{3,4}+t_{4,2}×t_{3,2}+t_{4,2}×t_{3,3}+t_{4,3}×t_{3,2}+t_{4,3}×t_{3,3}+t_{4,4}×t_{3,1})}
-#' \deqn{x_{4,4}=1/4×(t_{2,2}×t_{4,4}+t_{2,3}×t_{4,4}+t_{2,4}×t_{4,2}+t_{2,4}×t_{4,3}+t_{3,2}×t_{4,4}+t_{3,3}×t_{4,4}+t_{3,4}×t_{4,2}+t_{3,4}×t_{4,3}+t_{4,2}×t_{2,4}+t_{4,3}×t_{2,4}+t_{4,4}×t_{2,2}+t_{4,4}×t_{2,3}+t_{4,2}×t_{3,4}+t_{4,3}×t_{3,4}+t_{4,4}×t_{3,2}+t_{4,4}×t_{3,3})}
-#' \deqn{x_{4,5}=t_{2,4}×t_{4,4}+t_{3,4}×t_{4,4}+t_{4,4}×t_{2,4}+t_{4,4}×t_{3,4}}
-#' \deqn{x_{5,1}=t_{4,1}×t_{4,1}}
-#' \deqn{x_{5,2}=1/4×(t_{4,1}×t_{4,2}+t_{4,1}×t_{4,3}+t_{4,2}×t_{4,1}+t_{4,3}×t_{4,1})}
-#' \deqn{x_{5,3}=1/6×(t_{4,1}×t_{4,4}+t_{4,2}×t_{4,2}+t_{4,2}×t_{4,3}+t_{4,3}×t_{4,2}+t_{4,3}×t_{4,3}+t_{4,4}×t_{4,1})}
-#' \deqn{x_{5,4}=1/4×(t_{4,2}×t_{4,4}+t_{4,3}×t_{4,4}+t_{4,4}×t_{4,2}+t_{4,4}×t_{4,3})}
-#' \deqn{x_{5,5}=t_{4,4}×t_{4,4}}
-#' The cost function was defined by \deqn{f_cost=\sum_{i=1,j=1}^{n=5} (o_{i,j}-x_{i,j})} and minimized using the Newton-Raphson method.
-#' @references .
+#' 		terminational_class5(1) \tab \eqn{x_{5,1}} \tab \eqn{x_{5,2}} \tab \eqn{x_{5,3}} \tab \eqn{x_{5,4}} \tab \eqn{x_{5,5}}\cr
+#' 	}
+#' 	and \deqn{x_{1,1}=t_{1,1} \times t_{1,1}}
+#' \deqn{x_{1,1}=t_{{,1},1} \times t_{{,1},1}}
+#' \deqn{x_{1,2}=1/4 \times (t_{1,1} \times t_{1,2}+t_{1,1} \times t_{1,3}+t_{1,2} \times t_{1,1}+t_{1,3} \times t_{1,1})}
+#' \deqn{x_{1,3}=1/6 \times (t_{1,1} \times t_{1,4}+t_{1,2} \times t_{1,2}+t_{1,2} \times t_{1,3}+t_{1,3} \times t_{1,2}+t_{1,3} \times t_{1,3}+t_{1,4} \times t_{1,1})}
+#' \deqn{x_{1,4}=1/4 \times (t_{1,2} \times t_{1,4}+t_{1,3} \times t_{1,4}+t_{1,4} \times t_{1,2}+t_{1,4} \times t_{1,3})}
+#' \deqn{x_{1,5}=t_{1,4} \times t_{1,4}}
+#' \deqn{x_{2,1}=t_{1,1} \times t_{2,1}+t_{1,1} \times t_{3,1}+t_{2,1} \times t_{1,1}+t_{3,1} \times t_{1,1}}
+#' \deqn{x_{2,2}=1/4 \times (t_{1,1} \times t_{2,2}+t_{1,1} \times t_{2,3}+t_{1,2} \times t_{2,1}+t_{1,3} \times t_{2,1}+t_{1,1} \times t_{3,2}+t_{1,1} \times t_{3,3}+t_{1,2} \times t_{3,1}+t_{1,3} \times t_{3,1}+t_{2,1} \times t_{1,2}+t_{2,1} \times t_{1,3}+t_{2,2} \times t_{1,1}+t_{2,3} \times t_{1,1}+t_{3,1} \times t_{1,2}+t_{3,1} \times t_{1,3}+t_{3,2} \times t_{1,1}+t_{3,3} \times t_{1,1})}
+#' \deqn{x_{2,3}=1/6 \times (t_{1,1} \times t_{2,4}+t_{1,2} \times t_{2,2}+t_{1,2} \times t_{2,3}+t_{1,3} \times t_{2,2}+t_{1,3} \times t_{2,3}+t_{1,4} \times t_{2,1}+t_{1,1} \times t_{3,4}+t_{1,2} \times t_{3,2}+t_{1,2} \times t_{3,3}+t_{1,3} \times t_{3,2}+t_{1,3} \times t_{3,3}+t_{1,4} \times t_{3,1}+t_{2,1} \times t_{1,4}+t_{2,2} \times t_{1,2}+t_{2,2} \times t_{1,3}+t_{2,3} \times t_{1,2}+t_{2,3} \times t_{1,3}+t_{2,4} \times t_{1,1}+t_{3,1} \times t_{1,4}+t_{3,2} \times t_{1,2}+t_{3,2} \times t_{1,3}+t_{3,3} \times t_{1,2}+t_{3,3} \times t_{1,3}+t_{3,4} \times t_{1,1})}
+#' \deqn{x_{2,4}=1/4 \times (t_{1,2} \times t_{2,4}+t_{1,3} \times t_{2,4}+t_{1,4} \times t_{2,2}+t_{1,4} \times t_{2,3}+t_{1,2} \times t_{3,4}+t_{1,3} \times t_{3,4}+t_{1,4} \times t_{3,2}+t_{1,4} \times t_{3,3}+t_{2,2} \times t_{1,4}+t_{2,3} \times t_{1,4}+t_{2,4} \times t_{1,2}+t_{2,4} \times t_{1,3}+t_{3,2} \times t_{1,4}+t_{3,3} \times t_{1,4}+t_{3,4} \times t_{1,2}+t_{3,4} \times t_{1,3})}
+#' \deqn{x_{2,5}=t_{1,4} \times t_{2,4}+t_{1,4} \times t_{3,4}+t_{2,4} \times t_{1,4}+t_{3,4} \times t_{1,4}}
+#' \deqn{x_{3,1}=t_{1,1} \times t_{4,1}+t_{2,1} \times t_{2,1}+t_{2,1} \times t_{3,1}+t_{3,1} \times t_{2,1}+t_{3,1} \times t_{3,1}+t_{4,1} \times t_{1,1}}
+#' \deqn{x_{3,2}=1/4 \times (t_{1,1} \times t_{4,2}+t_{1,1} \times t_{4,3}+t_{1,2} \times t_{4,1}+t_{1,3} \times t_{4,1}+t_{2,1} \times t_{2,2}+t_{2,1} \times t_{2,3}+t_{2,2} \times t_{2,1}+t_{2,3} \times t_{2,1}+t_{2,1} \times t_{3,2}+t_{2,1} \times t_{3,3}+t_{2,2} \times t_{3,1}+t_{2,3} \times t_{3,1}+t_{3,1} \times t_{2,2}+t_{3,1} \times t_{2,3}+t_{3,2} \times t_{2,1}+t_{3,3} \times t_{2,1}+t_{3,1} \times t_{3,2}+t_{3,1} \times t_{3,3}+t_{3,2} \times t_{3,1}+t_{3,3} \times t_{3,1}+t_{4,1} \times t_{1,2}+t_{4,1} \times t_{1,3}+t_{4,2} \times t_{1,1}+t_{4,3} \times t_{1,1})}
+#' \deqn{x_{3,3}=1/6 \times (t_{1,1} \times t_{4,4}+t_{1,2} \times t_{4,2}+t_{1,2} \times t_{4,3}+t_{1,3} \times t_{4,2}+t_{1,3} \times t_{4,3}+t_{1,4} \times t_{4,1}+t_{2,1} \times t_{2,4}+t_{2,2} \times t_{2,2}+t_{2,2} \times t_{2,3}+t_{2,3} \times t_{2,2}+t_{2,3} \times t_{2,3}+t_{2,4} \times t_{2,1}+t_{2,1} \times t_{3,4}+t_{2,2} \times t_{3,2}+t_{2,2} \times t_{3,3}+t_{2,3} \times t_{3,2}+t_{2,3} \times t_{3,3}+t_{2,4} \times t_{3,1}+t_{3,1} \times t_{2,4}+t_{3,2} \times t_{2,2}+t_{3,2} \times t_{2,3}+t_{3,3} \times t_{2,2}+t_{3,3} \times t_{2,3}+t_{3,4} \times t_{2,1}+t_{3,1} \times t_{3,4}+t_{3,2} \times t_{3,2}+t_{3,2} \times t_{3,3}+t_{3,3} \times t_{3,2}+t_{3,3} \times t_{3,3}+t_{3,4} \times t_{3,1}+t_{4,1} \times t_{1,4}+t_{4,2} \times t_{1,2}+t_{4,2} \times t_{1,3}+t_{4,3} \times t_{1,2}+t_{4,3} \times t_{1,3}+t_{4,4} \times t_{1,1})}
+#' \deqn{x_{3,4}=1/4 \times (t_{1,2} \times t_{4,4}+t_{1,3} \times t_{4,4}+t_{1,4} \times t_{4,2}+t_{1,4} \times t_{4,3}+t_{2,2} \times t_{2,4}+t_{2,3} \times t_{2,4}+t_{2,4} \times t_{2,2}+t_{2,4} \times t_{2,3}+t_{2,2} \times t_{3,4}+t_{2,3} \times t_{3,4}+t_{2,4} \times t_{3,2}+t_{2,4} \times t_{3,3}+t_{3,2} \times t_{2,4}+t_{3,3} \times t_{2,4}+t_{3,4} \times t_{2,2}+t_{3,4} \times t_{2,3}+t_{3,2} \times t_{3,4}+t_{3,3} \times t_{3,4}+t_{3,4} \times t_{3,2}+t_{3,4} \times t_{3,3}+t_{4,2} \times t_{1,4}+t_{4,3} \times t_{1,4}+t_{4,4} \times t_{1,2}+t_{4,4} \times t_{1,3})}
+#' \deqn{x_{3,5}=t_{1,4} \times t_{4,4}+t_{2,4} \times t_{2,4}+t_{2,4} \times t_{3,4}+t_{3,4} \times t_{2,4}+t_{3,4} \times t_{3,4}+t_{4,4} \times t_{1,4}}
+#' \deqn{x_{4,1}=t_{2,1} \times t_{4,1}+t_{3,1} \times t_{4,1}+t_{4,1} \times t_{2,1}+t_{4,1} \times t_{3,1}}
+#' \deqn{x_{4,2}=1/4 \times (t_{2,1} \times t_{4,2}+t_{2,1} \times t_{4,3}+t_{2,2} \times t_{4,1}+t_{2,3} \times t_{4,1}+t_{3,1} \times t_{4,2}+t_{3,1} \times t_{4,3}+t_{3,2} \times t_{4,1}+t_{3,3} \times t_{4,1}+t_{4,1} \times t_{2,2}+t_{4,1} \times t_{2,3}+t_{4,2} \times t_{2,1}+t_{4,3} \times t_{2,1}+t_{4,1} \times t_{3,2}+t_{4,1} \times t_{3,3}+t_{4,2} \times t_{3,1}+t_{4,3} \times t_{3,1})}
+#' \deqn{x_{4,3}=1/6 \times (t_{2,1} \times t_{4,4}+t_{2,2} \times t_{4,2}+t_{2,2} \times t_{4,3}+t_{2,3} \times t_{4,2}+t_{2,3} \times t_{4,3}+t_{2,4} \times t_{4,1}+t_{3,1} \times t_{4,4}+t_{3,2} \times t_{4,2}+t_{3,2} \times t_{4,3}+t_{3,3} \times t_{4,2}+t_{3,3} \times t_{4,3}+t_{3,4} \times t_{4,1}+t_{4,1} \times t_{2,4}+t_{4,2} \times t_{2,2}+t_{4,2} \times t_{2,3}+t_{4,3} \times t_{2,2}+t_{4,3} \times t_{2,3}+t_{4,4} \times t_{2,1}+t_{4,1} \times t_{3,4}+t_{4,2} \times t_{3,2}+t_{4,2} \times t_{3,3}+t_{4,3} \times t_{3,2}+t_{4,3} \times t_{3,3}+t_{4,4} \times t_{3,1})}
+#' \deqn{x_{4,4}=1/4 \times (t_{2,2} \times t_{4,4}+t_{2,3} \times t_{4,4}+t_{2,4} \times t_{4,2}+t_{2,4} \times t_{4,3}+t_{3,2} \times t_{4,4}+t_{3,3} \times t_{4,4}+t_{3,4} \times t_{4,2}+t_{3,4} \times t_{4,3}+t_{4,2} \times t_{2,4}+t_{4,3} \times t_{2,4}+t_{4,4} \times t_{2,2}+t_{4,4} \times t_{2,3}+t_{4,2} \times t_{3,4}+t_{4,3} \times t_{3,4}+t_{4,4} \times t_{3,2}+t_{4,4} \times t_{3,3})}
+#' \deqn{x_{4,5}=t_{2,4} \times t_{4,4}+t_{3,4} \times t_{4,4}+t_{4,4} \times t_{2,4}+t_{4,4} \times t_{3,4}}
+#' \deqn{x_{5,1}=t_{4,1} \times t_{4,1}}
+#' \deqn{x_{5,2}=1/4 \times (t_{4,1} \times t_{4,2}+t_{4,1} \times t_{4,3}+t_{4,2} \times t_{4,1}+t_{4,3} \times t_{4,1})}
+#' \deqn{x_{5,3}=1/6 \times (t_{4,1} \times t_{4,4}+t_{4,2} \times t_{4,2}+t_{4,2} \times t_{4,3}+t_{4,3} \times t_{4,2}+t_{4,3} \times t_{4,3}+t_{4,4} \times t_{4,1})}
+#' \deqn{x_{5,4}=1/4 \times (t_{4,2} \times t_{4,4}+t_{4,3} \times t_{4,4}+t_{4,4} \times t_{4,2}+t_{4,4} \times t_{4,3})}
+#' \deqn{x_{5,5}=t_{4,4} \times t_{4,4}}
+#' The cost function was defined by \deqn{f_{cost}=\sum_{i=1,j=1}^{n=5} (o_{i,j}-x_{i,j})} and minimized using the Newton-Raphson method.
+#' @references \cite{Zhao, C. et.al.(2018). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
 #' @examples # Let's start from a transtion matrix
 #' observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0.0001,
 #'                                0.0497,0.5873,0.1887,0.0344,0.0149,
@@ -183,7 +183,7 @@ ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 		stop("The input observation transition ratio should be numeric number.")
 	}
 	if (ncol(observation_matrix) != 5 | nrow(observation_matrix) != 5){
-		stop("The input transition matrix should be a \"5×5\" matrix.\n\n")
+		stop("The input transition matrix should be a \"5 \times 5\" matrix.\n\n")
 	}
 	if (cell_cycle <= 0){
 		stop("Please selected a right number of cell cycles!\n\n")
@@ -214,7 +214,7 @@ ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 	cat("\n")
 	cat("\tParameter Estimation\n")
 	cat("\n")
-	cat(paste("ParameterEstimation for ",cell_cycle," cell cycle(s) is running ...\n",sep=""))
+	cat(paste("ParameterEstimation for ",round(cell_cycle)," cell cycle(s) is running ...\n",sep=""))
 	for (i in seq(iter)){
 		if (i%%10==0){
 			cat(paste("\t",i,"/",iter," iterations...\n",sep=""))

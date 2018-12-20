@@ -106,16 +106,16 @@ MethyClass2Mean <- function(x){
 #' 		after_replication(0-1) \tab \eqn{0} \tab \eqn{1-a} \tab \eqn{0} \tab \eqn{1-a} \cr
 #' 		after_replication(1-0) \tab \eqn{0} \tab \eqn{0} \tab \eqn{0} \tab \eqn{a} \cr
 #' 		after_replication(1-1) \tab \eqn{0} \tab \eqn{0} \tab \eqn{0} \tab \eqn{0} \cr
-#' 	}\cr
+#' 	}
 #' 	among this matrix ,\eqn{a} is the methylation change probability with DNA replication and equal to 0.5.
 #' 	Then the transition matrix after active DNA methylation changes would be:
 #' 	\tabular{cccccc}{
 #' 		\tab after_replication(0-0) \tab after_replication(0-1) \tab after_replication(1-0) \tab after_replication(1-1) \cr
-#' 		after_enzymemodifying(0-0) \tab \eqn{(1-u)×(1-u)} \tab \eqn{(1-u-p+u×p)×d} \tab \eqn{d×(1-u-p+u×p)} \tab \eqn{0} \cr
-#' 		after_enzymemodifying(0-1) \tab \eqn{u×(1-u)} \tab \eqn{(1-u-p+u×p)×(1-d)} \tab \eqn{d×(u+p-u×p)} \tab \eqn{0} \cr
-#' 		after_enzymemodifying(1-0) \tab \eqn{u×(1-u)} \tab \eqn{(u+p-u×p)×d} \tab \eqn{(1-d)×(1-u-p+u×p)} \tab \eqn{0} \cr
-#' 		after_enzymemodifying(1-1) \tab \eqn{u×u} \tab \eqn{(u+p-u×p)×(1-d)} \tab \eqn{(1-d)×(u+p-u×p)} \tab \eqn{1} \cr
-#' 	}\cr
+#' 		after_enzymemodifying(0-0) \tab \eqn{(1-u )\times (1-u)} \tab \eqn{(1-u-p+u \times p )\times d} \tab \eqn{d \times (1-u-p+u \times p)} \tab \eqn{0} \cr
+#' 		after_enzymemodifying(0-1) \tab \eqn{u \times (1-u)} \tab \eqn{(1-u-p+u \times p )\times (1-d)} \tab \eqn{d \times (u+p-u \times p)} \tab \eqn{0} \cr
+#' 		after_enzymemodifying(1-0) \tab \eqn{u \times (1-u)} \tab \eqn{(u+p-u \times p )\times d} \tab \eqn{(1-d )\times (1-u-p+u \times p)} \tab \eqn{0} \cr
+#' 		after_enzymemodifying(1-1) \tab \eqn{u \times u} \tab \eqn{(u+p-u \times p )\times (1-d)} \tab \eqn{(1-d )\times (u+p-u \times p)} \tab \eqn{1} \cr
+#' 	}
 #' 	The paramater \eqn{u} described the methylation probablity on CpG site.
 #' 	The paramater \eqn{d} described the de-methylation probablity on 5mCpG site.
 #' 	The paramater \eqn{p} described the methylation probablity on semi-CpG site.
@@ -129,36 +129,36 @@ MethyClass2Mean <- function(x){
 #' 		terminational_class2(1/4) \tab \eqn{x_{2,1}} \tab \eqn{x_{2,2}} \tab \eqn{x_{2,3}} \tab \eqn{x_{2,4}} \tab \eqn{x_{2,5}}\cr
 #' 		terminational_class3(1/2) \tab \eqn{x_{3,1}} \tab \eqn{x_{3,2}} \tab \eqn{x_{3,3}} \tab \eqn{x_{3,4}} \tab \eqn{x_{3,5}}\cr
 #' 		terminational_class4(3/4) \tab \eqn{x_{4,1}} \tab \eqn{x_{4,2}} \tab \eqn{x_{4,3}} \tab \eqn{x_{4,4}} \tab \eqn{x_{4,5}}\cr
-#' 		terminational_class5(1) \tab \eqn{x_{5,1}} \tab \eqn{x_{5,2}} \tab \eqn{x_{5,3}} \tab \eqn{x_{5,4}} \tab \eqn{x_{5,5}}
-#' 	}\cr
-#' 	and \deqn{x_{1,1}=t_{1,1}×t_{1,1}}
-#' \deqn{x_{1,1}=t_{{,1},1}×t_{{,1},1}}
-#' \deqn{x_{1,2}=1/4×(t_{1,1}×t_{1,2}+t_{1,1}×t_{1,3}+t_{1,2}×t_{1,1}+t_{1,3}×t_{1,1})}
-#' \deqn{x_{1,3}=1/6×(t_{1,1}×t_{1,4}+t_{1,2}×t_{1,2}+t_{1,2}×t_{1,3}+t_{1,3}×t_{1,2}+t_{1,3}×t_{1,3}+t_{1,4}×t_{1,1})}
-#' \deqn{x_{1,4}=1/4×(t_{1,2}×t_{1,4}+t_{1,3}×t_{1,4}+t_{1,4}×t_{1,2}+t_{1,4}×t_{1,3})}
-#' \deqn{x_{1,5}=t_{1,4}×t_{1,4}}
-#' \deqn{x_{2,1}=t_{1,1}×t_{2,1}+t_{1,1}×t_{3,1}+t_{2,1}×t_{1,1}+t_{3,1}×t_{1,1}}
-#' \deqn{x_{2,2}=1/4×(t_{1,1}×t_{2,2}+t_{1,1}×t_{2,3}+t_{1,2}×t_{2,1}+t_{1,3}×t_{2,1}+t_{1,1}×t_{3,2}+t_{1,1}×t_{3,3}+t_{1,2}×t_{3,1}+t_{1,3}×t_{3,1}+t_{2,1}×t_{1,2}+t_{2,1}×t_{1,3}+t_{2,2}×t_{1,1}+t_{2,3}×t_{1,1}+t_{3,1}×t_{1,2}+t_{3,1}×t_{1,3}+t_{3,2}×t_{1,1}+t_{3,3}×t_{1,1})}
-#' \deqn{x_{2,3}=1/6×(t_{1,1}×t_{2,4}+t_{1,2}×t_{2,2}+t_{1,2}×t_{2,3}+t_{1,3}×t_{2,2}+t_{1,3}×t_{2,3}+t_{1,4}×t_{2,1}+t_{1,1}×t_{3,4}+t_{1,2}×t_{3,2}+t_{1,2}×t_{3,3}+t_{1,3}×t_{3,2}+t_{1,3}×t_{3,3}+t_{1,4}×t_{3,1}+t_{2,1}×t_{1,4}+t_{2,2}×t_{1,2}+t_{2,2}×t_{1,3}+t_{2,3}×t_{1,2}+t_{2,3}×t_{1,3}+t_{2,4}×t_{1,1}+t_{3,1}×t_{1,4}+t_{3,2}×t_{1,2}+t_{3,2}×t_{1,3}+t_{3,3}×t_{1,2}+t_{3,3}×t_{1,3}+t_{3,4}×t_{1,1})}
-#' \deqn{x_{2,4}=1/4×(t_{1,2}×t_{2,4}+t_{1,3}×t_{2,4}+t_{1,4}×t_{2,2}+t_{1,4}×t_{2,3}+t_{1,2}×t_{3,4}+t_{1,3}×t_{3,4}+t_{1,4}×t_{3,2}+t_{1,4}×t_{3,3}+t_{2,2}×t_{1,4}+t_{2,3}×t_{1,4}+t_{2,4}×t_{1,2}+t_{2,4}×t_{1,3}+t_{3,2}×t_{1,4}+t_{3,3}×t_{1,4}+t_{3,4}×t_{1,2}+t_{3,4}×t_{1,3})}
-#' \deqn{x_{2,5}=t_{1,4}×t_{2,4}+t_{1,4}×t_{3,4}+t_{2,4}×t_{1,4}+t_{3,4}×t_{1,4}}
-#' \deqn{x_{3,1}=t_{1,1}×t_{4,1}+t_{2,1}×t_{2,1}+t_{2,1}×t_{3,1}+t_{3,1}×t_{2,1}+t_{3,1}×t_{3,1}+t_{4,1}×t_{1,1}}
-#' \deqn{x_{3,2}=1/4×(t_{1,1}×t_{4,2}+t_{1,1}×t_{4,3}+t_{1,2}×t_{4,1}+t_{1,3}×t_{4,1}+t_{2,1}×t_{2,2}+t_{2,1}×t_{2,3}+t_{2,2}×t_{2,1}+t_{2,3}×t_{2,1}+t_{2,1}×t_{3,2}+t_{2,1}×t_{3,3}+t_{2,2}×t_{3,1}+t_{2,3}×t_{3,1}+t_{3,1}×t_{2,2}+t_{3,1}×t_{2,3}+t_{3,2}×t_{2,1}+t_{3,3}×t_{2,1}+t_{3,1}×t_{3,2}+t_{3,1}×t_{3,3}+t_{3,2}×t_{3,1}+t_{3,3}×t_{3,1}+t_{4,1}×t_{1,2}+t_{4,1}×t_{1,3}+t_{4,2}×t_{1,1}+t_{4,3}×t_{1,1})}
-#' \deqn{x_{3,3}=1/6×(t_{1,1}×t_{4,4}+t_{1,2}×t_{4,2}+t_{1,2}×t_{4,3}+t_{1,3}×t_{4,2}+t_{1,3}×t_{4,3}+t_{1,4}×t_{4,1}+t_{2,1}×t_{2,4}+t_{2,2}×t_{2,2}+t_{2,2}×t_{2,3}+t_{2,3}×t_{2,2}+t_{2,3}×t_{2,3}+t_{2,4}×t_{2,1}+t_{2,1}×t_{3,4}+t_{2,2}×t_{3,2}+t_{2,2}×t_{3,3}+t_{2,3}×t_{3,2}+t_{2,3}×t_{3,3}+t_{2,4}×t_{3,1}+t_{3,1}×t_{2,4}+t_{3,2}×t_{2,2}+t_{3,2}×t_{2,3}+t_{3,3}×t_{2,2}+t_{3,3}×t_{2,3}+t_{3,4}×t_{2,1}+t_{3,1}×t_{3,4}+t_{3,2}×t_{3,2}+t_{3,2}×t_{3,3}+t_{3,3}×t_{3,2}+t_{3,3}×t_{3,3}+t_{3,4}×t_{3,1}+t_{4,1}×t_{1,4}+t_{4,2}×t_{1,2}+t_{4,2}×t_{1,3}+t_{4,3}×t_{1,2}+t_{4,3}×t_{1,3}+t_{4,4}×t_{1,1})}
-#' \deqn{x_{3,4}=1/4×(t_{1,2}×t_{4,4}+t_{1,3}×t_{4,4}+t_{1,4}×t_{4,2}+t_{1,4}×t_{4,3}+t_{2,2}×t_{2,4}+t_{2,3}×t_{2,4}+t_{2,4}×t_{2,2}+t_{2,4}×t_{2,3}+t_{2,2}×t_{3,4}+t_{2,3}×t_{3,4}+t_{2,4}×t_{3,2}+t_{2,4}×t_{3,3}+t_{3,2}×t_{2,4}+t_{3,3}×t_{2,4}+t_{3,4}×t_{2,2}+t_{3,4}×t_{2,3}+t_{3,2}×t_{3,4}+t_{3,3}×t_{3,4}+t_{3,4}×t_{3,2}+t_{3,4}×t_{3,3}+t_{4,2}×t_{1,4}+t_{4,3}×t_{1,4}+t_{4,4}×t_{1,2}+t_{4,4}×t_{1,3})}
-#' \deqn{x_{3,5}=t_{1,4}×t_{4,4}+t_{2,4}×t_{2,4}+t_{2,4}×t_{3,4}+t_{3,4}×t_{2,4}+t_{3,4}×t_{3,4}+t_{4,4}×t_{1,4}}
-#' \deqn{x_{4,1}=t_{2,1}×t_{4,1}+t_{3,1}×t_{4,1}+t_{4,1}×t_{2,1}+t_{4,1}×t_{3,1}}
-#' \deqn{x_{4,2}=1/4×(t_{2,1}×t_{4,2}+t_{2,1}×t_{4,3}+t_{2,2}×t_{4,1}+t_{2,3}×t_{4,1}+t_{3,1}×t_{4,2}+t_{3,1}×t_{4,3}+t_{3,2}×t_{4,1}+t_{3,3}×t_{4,1}+t_{4,1}×t_{2,2}+t_{4,1}×t_{2,3}+t_{4,2}×t_{2,1}+t_{4,3}×t_{2,1}+t_{4,1}×t_{3,2}+t_{4,1}×t_{3,3}+t_{4,2}×t_{3,1}+t_{4,3}×t_{3,1})}
-#' \deqn{x_{4,3}=1/6×(t_{2,1}×t_{4,4}+t_{2,2}×t_{4,2}+t_{2,2}×t_{4,3}+t_{2,3}×t_{4,2}+t_{2,3}×t_{4,3}+t_{2,4}×t_{4,1}+t_{3,1}×t_{4,4}+t_{3,2}×t_{4,2}+t_{3,2}×t_{4,3}+t_{3,3}×t_{4,2}+t_{3,3}×t_{4,3}+t_{3,4}×t_{4,1}+t_{4,1}×t_{2,4}+t_{4,2}×t_{2,2}+t_{4,2}×t_{2,3}+t_{4,3}×t_{2,2}+t_{4,3}×t_{2,3}+t_{4,4}×t_{2,1}+t_{4,1}×t_{3,4}+t_{4,2}×t_{3,2}+t_{4,2}×t_{3,3}+t_{4,3}×t_{3,2}+t_{4,3}×t_{3,3}+t_{4,4}×t_{3,1})}
-#' \deqn{x_{4,4}=1/4×(t_{2,2}×t_{4,4}+t_{2,3}×t_{4,4}+t_{2,4}×t_{4,2}+t_{2,4}×t_{4,3}+t_{3,2}×t_{4,4}+t_{3,3}×t_{4,4}+t_{3,4}×t_{4,2}+t_{3,4}×t_{4,3}+t_{4,2}×t_{2,4}+t_{4,3}×t_{2,4}+t_{4,4}×t_{2,2}+t_{4,4}×t_{2,3}+t_{4,2}×t_{3,4}+t_{4,3}×t_{3,4}+t_{4,4}×t_{3,2}+t_{4,4}×t_{3,3})}
-#' \deqn{x_{4,5}=t_{2,4}×t_{4,4}+t_{3,4}×t_{4,4}+t_{4,4}×t_{2,4}+t_{4,4}×t_{3,4}}
-#' \deqn{x_{5,1}=t_{4,1}×t_{4,1}}
-#' \deqn{x_{5,2}=1/4×(t_{4,1}×t_{4,2}+t_{4,1}×t_{4,3}+t_{4,2}×t_{4,1}+t_{4,3}×t_{4,1})}
-#' \deqn{x_{5,3}=1/6×(t_{4,1}×t_{4,4}+t_{4,2}×t_{4,2}+t_{4,2}×t_{4,3}+t_{4,3}×t_{4,2}+t_{4,3}×t_{4,3}+t_{4,4}×t_{4,1})}
-#' \deqn{x_{5,4}=1/4×(t_{4,2}×t_{4,4}+t_{4,3}×t_{4,4}+t_{4,4}×t_{4,2}+t_{4,4}×t_{4,3})}
-#' \deqn{x_{5,5}=t_{4,4}×t_{4,4}}
-#' @references .
-#' @examples MethylCalculation(original_classes,u,d,p)
+#' 		terminational_class5(1) \tab \eqn{x_{5,1}} \tab \eqn{x_{5,2}} \tab \eqn{x_{5,3}} \tab \eqn{x_{5,4}} \tab \eqn{x_{5,5}}\cr
+#' 	}
+#' 	and \deqn{x_{1,1}=t_{1,1 }\times t_{1,1}}
+#' \deqn{x_{1,1}=t_{{,1},1 }\times t_{{,1},1}}
+#' \deqn{x_{1,2}=1/4 \times (t_{1,1 }\times t_{1,2}+t_{1,1 }\times t_{1,3}+t_{1,2 }\times t_{1,1}+t_{1,3 }\times t_{1,1})}
+#' \deqn{x_{1,3}=1/6 \times (t_{1,1 }\times t_{1,4}+t_{1,2 }\times t_{1,2}+t_{1,2 }\times t_{1,3}+t_{1,3 }\times t_{1,2}+t_{1,3 }\times t_{1,3}+t_{1,4 }\times t_{1,1})}
+#' \deqn{x_{1,4}=1/4 \times (t_{1,2 }\times t_{1,4}+t_{1,3 }\times t_{1,4}+t_{1,4 }\times t_{1,2}+t_{1,4 }\times t_{1,3})}
+#' \deqn{x_{1,5}=t_{1,4 }\times t_{1,4}}
+#' \deqn{x_{2,1}=t_{1,1 }\times t_{2,1}+t_{1,1 }\times t_{3,1}+t_{2,1 }\times t_{1,1}+t_{3,1 }\times t_{1,1}}
+#' \deqn{x_{2,2}=1/4 \times (t_{1,1 }\times t_{2,2}+t_{1,1 }\times t_{2,3}+t_{1,2 }\times t_{2,1}+t_{1,3 }\times t_{2,1}+t_{1,1 }\times t_{3,2}+t_{1,1 }\times t_{3,3}+t_{1,2 }\times t_{3,1}+t_{1,3 }\times t_{3,1}+t_{2,1 }\times t_{1,2}+t_{2,1 }\times t_{1,3}+t_{2,2 }\times t_{1,1}+t_{2,3 }\times t_{1,1}+t_{3,1 }\times t_{1,2}+t_{3,1 }\times t_{1,3}+t_{3,2 }\times t_{1,1}+t_{3,3 }\times t_{1,1})}
+#' \deqn{x_{2,3}=1/6 \times (t_{1,1 }\times t_{2,4}+t_{1,2 }\times t_{2,2}+t_{1,2 }\times t_{2,3}+t_{1,3 }\times t_{2,2}+t_{1,3 }\times t_{2,3}+t_{1,4 }\times t_{2,1}+t_{1,1 }\times t_{3,4}+t_{1,2 }\times t_{3,2}+t_{1,2 }\times t_{3,3}+t_{1,3 }\times t_{3,2}+t_{1,3 }\times t_{3,3}+t_{1,4 }\times t_{3,1}+t_{2,1 }\times t_{1,4}+t_{2,2 }\times t_{1,2}+t_{2,2 }\times t_{1,3}+t_{2,3 }\times t_{1,2}+t_{2,3 }\times t_{1,3}+t_{2,4 }\times t_{1,1}+t_{3,1 }\times t_{1,4}+t_{3,2 }\times t_{1,2}+t_{3,2 }\times t_{1,3}+t_{3,3 }\times t_{1,2}+t_{3,3 }\times t_{1,3}+t_{3,4 }\times t_{1,1})}
+#' \deqn{x_{2,4}=1/4 \times (t_{1,2 }\times t_{2,4}+t_{1,3 }\times t_{2,4}+t_{1,4 }\times t_{2,2}+t_{1,4 }\times t_{2,3}+t_{1,2 }\times t_{3,4}+t_{1,3 }\times t_{3,4}+t_{1,4 }\times t_{3,2}+t_{1,4 }\times t_{3,3}+t_{2,2 }\times t_{1,4}+t_{2,3 }\times t_{1,4}+t_{2,4 }\times t_{1,2}+t_{2,4 }\times t_{1,3}+t_{3,2 }\times t_{1,4}+t_{3,3 }\times t_{1,4}+t_{3,4 }\times t_{1,2}+t_{3,4 }\times t_{1,3})}
+#' \deqn{x_{2,5}=t_{1,4 }\times t_{2,4}+t_{1,4 }\times t_{3,4}+t_{2,4 }\times t_{1,4}+t_{3,4 }\times t_{1,4}}
+#' \deqn{x_{3,1}=t_{1,1 }\times t_{4,1}+t_{2,1 }\times t_{2,1}+t_{2,1 }\times t_{3,1}+t_{3,1 }\times t_{2,1}+t_{3,1 }\times t_{3,1}+t_{4,1 }\times t_{1,1}}
+#' \deqn{x_{3,2}=1/4 \times (t_{1,1 }\times t_{4,2}+t_{1,1 }\times t_{4,3}+t_{1,2 }\times t_{4,1}+t_{1,3 }\times t_{4,1}+t_{2,1 }\times t_{2,2}+t_{2,1 }\times t_{2,3}+t_{2,2 }\times t_{2,1}+t_{2,3 }\times t_{2,1}+t_{2,1 }\times t_{3,2}+t_{2,1 }\times t_{3,3}+t_{2,2 }\times t_{3,1}+t_{2,3 }\times t_{3,1}+t_{3,1 }\times t_{2,2}+t_{3,1 }\times t_{2,3}+t_{3,2 }\times t_{2,1}+t_{3,3 }\times t_{2,1}+t_{3,1 }\times t_{3,2}+t_{3,1 }\times t_{3,3}+t_{3,2 }\times t_{3,1}+t_{3,3 }\times t_{3,1}+t_{4,1 }\times t_{1,2}+t_{4,1 }\times t_{1,3}+t_{4,2 }\times t_{1,1}+t_{4,3 }\times t_{1,1})}
+#' \deqn{x_{3,3}=1/6 \times (t_{1,1 }\times t_{4,4}+t_{1,2 }\times t_{4,2}+t_{1,2 }\times t_{4,3}+t_{1,3 }\times t_{4,2}+t_{1,3 }\times t_{4,3}+t_{1,4 }\times t_{4,1}+t_{2,1 }\times t_{2,4}+t_{2,2 }\times t_{2,2}+t_{2,2 }\times t_{2,3}+t_{2,3 }\times t_{2,2}+t_{2,3 }\times t_{2,3}+t_{2,4 }\times t_{2,1}+t_{2,1 }\times t_{3,4}+t_{2,2 }\times t_{3,2}+t_{2,2 }\times t_{3,3}+t_{2,3 }\times t_{3,2}+t_{2,3 }\times t_{3,3}+t_{2,4 }\times t_{3,1}+t_{3,1 }\times t_{2,4}+t_{3,2 }\times t_{2,2}+t_{3,2 }\times t_{2,3}+t_{3,3 }\times t_{2,2}+t_{3,3 }\times t_{2,3}+t_{3,4 }\times t_{2,1}+t_{3,1 }\times t_{3,4}+t_{3,2 }\times t_{3,2}+t_{3,2 }\times t_{3,3}+t_{3,3 }\times t_{3,2}+t_{3,3 }\times t_{3,3}+t_{3,4 }\times t_{3,1}+t_{4,1 }\times t_{1,4}+t_{4,2 }\times t_{1,2}+t_{4,2 }\times t_{1,3}+t_{4,3 }\times t_{1,2}+t_{4,3 }\times t_{1,3}+t_{4,4 }\times t_{1,1})}
+#' \deqn{x_{3,4}=1/4 \times (t_{1,2 }\times t_{4,4}+t_{1,3 }\times t_{4,4}+t_{1,4 }\times t_{4,2}+t_{1,4 }\times t_{4,3}+t_{2,2 }\times t_{2,4}+t_{2,3 }\times t_{2,4}+t_{2,4 }\times t_{2,2}+t_{2,4 }\times t_{2,3}+t_{2,2 }\times t_{3,4}+t_{2,3 }\times t_{3,4}+t_{2,4 }\times t_{3,2}+t_{2,4 }\times t_{3,3}+t_{3,2 }\times t_{2,4}+t_{3,3 }\times t_{2,4}+t_{3,4 }\times t_{2,2}+t_{3,4 }\times t_{2,3}+t_{3,2 }\times t_{3,4}+t_{3,3 }\times t_{3,4}+t_{3,4 }\times t_{3,2}+t_{3,4 }\times t_{3,3}+t_{4,2 }\times t_{1,4}+t_{4,3 }\times t_{1,4}+t_{4,4 }\times t_{1,2}+t_{4,4 }\times t_{1,3})}
+#' \deqn{x_{3,5}=t_{1,4 }\times t_{4,4}+t_{2,4 }\times t_{2,4}+t_{2,4 }\times t_{3,4}+t_{3,4 }\times t_{2,4}+t_{3,4 }\times t_{3,4}+t_{4,4 }\times t_{1,4}}
+#' \deqn{x_{4,1}=t_{2,1 }\times t_{4,1}+t_{3,1 }\times t_{4,1}+t_{4,1 }\times t_{2,1}+t_{4,1 }\times t_{3,1}}
+#' \deqn{x_{4,2}=1/4 \times (t_{2,1 }\times t_{4,2}+t_{2,1 }\times t_{4,3}+t_{2,2 }\times t_{4,1}+t_{2,3 }\times t_{4,1}+t_{3,1 }\times t_{4,2}+t_{3,1 }\times t_{4,3}+t_{3,2 }\times t_{4,1}+t_{3,3 }\times t_{4,1}+t_{4,1 }\times t_{2,2}+t_{4,1 }\times t_{2,3}+t_{4,2 }\times t_{2,1}+t_{4,3 }\times t_{2,1}+t_{4,1 }\times t_{3,2}+t_{4,1 }\times t_{3,3}+t_{4,2 }\times t_{3,1}+t_{4,3 }\times t_{3,1})}
+#' \deqn{x_{4,3}=1/6 \times (t_{2,1 }\times t_{4,4}+t_{2,2 }\times t_{4,2}+t_{2,2 }\times t_{4,3}+t_{2,3 }\times t_{4,2}+t_{2,3 }\times t_{4,3}+t_{2,4 }\times t_{4,1}+t_{3,1 }\times t_{4,4}+t_{3,2 }\times t_{4,2}+t_{3,2 }\times t_{4,3}+t_{3,3 }\times t_{4,2}+t_{3,3 }\times t_{4,3}+t_{3,4 }\times t_{4,1}+t_{4,1 }\times t_{2,4}+t_{4,2 }\times t_{2,2}+t_{4,2 }\times t_{2,3}+t_{4,3 }\times t_{2,2}+t_{4,3 }\times t_{2,3}+t_{4,4 }\times t_{2,1}+t_{4,1 }\times t_{3,4}+t_{4,2 }\times t_{3,2}+t_{4,2 }\times t_{3,3}+t_{4,3 }\times t_{3,2}+t_{4,3 }\times t_{3,3}+t_{4,4 }\times t_{3,1})}
+#' \deqn{x_{4,4}=1/4 \times (t_{2,2 }\times t_{4,4}+t_{2,3 }\times t_{4,4}+t_{2,4 }\times t_{4,2}+t_{2,4 }\times t_{4,3}+t_{3,2 }\times t_{4,4}+t_{3,3 }\times t_{4,4}+t_{3,4 }\times t_{4,2}+t_{3,4 }\times t_{4,3}+t_{4,2 }\times t_{2,4}+t_{4,3 }\times t_{2,4}+t_{4,4 }\times t_{2,2}+t_{4,4 }\times t_{2,3}+t_{4,2 }\times t_{3,4}+t_{4,3 }\times t_{3,4}+t_{4,4 }\times t_{3,2}+t_{4,4 }\times t_{3,3})}
+#' \deqn{x_{4,5}=t_{2,4 }\times t_{4,4}+t_{3,4 }\times t_{4,4}+t_{4,4 }\times t_{2,4}+t_{4,4 }\times t_{3,4}}
+#' \deqn{x_{5,1}=t_{4,1 }\times t_{4,1}}
+#' \deqn{x_{5,2}=1/4 \times (t_{4,1 }\times t_{4,2}+t_{4,1 }\times t_{4,3}+t_{4,2 }\times t_{4,1}+t_{4,3 }\times t_{4,1})}
+#' \deqn{x_{5,3}=1/6 \times (t_{4,1 }\times t_{4,4}+t_{4,2 }\times t_{4,2}+t_{4,2 }\times t_{4,3}+t_{4,3 }\times t_{4,2}+t_{4,3 }\times t_{4,3}+t_{4,4 }\times t_{4,1})}
+#' \deqn{x_{5,4}=1/4 \times (t_{4,2 }\times t_{4,4}+t_{4,3 }\times t_{4,4}+t_{4,4 }\times t_{4,2}+t_{4,4 }\times t_{4,3})}
+#' \deqn{x_{5,5}=t_{4,4 }\times t_{4,4}}
+#' @references \cite{Zhao, C. et.al.(2018). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
+#' @examples # MethylCalculation(original_classes,u,d,p)
 #' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=1)
 #' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=10)
 #' @concept MethylTransition
@@ -180,7 +180,7 @@ MethylCalculation <- function(original_classes,u,d,p,cell_cycle=1){
 	cat("\n")
 	cat("\tMethylation Calculation\n")
 	cat("\n")
-	cat(paste("It calculated the ratio of each methylation states after ",cell_cycle ," cell cycle(s).\n"))
+	cat(paste("It calculated the ratio of each methylation states after ",round(cell_cycle)," cell cycle(s).\n"))
 	cat("\n")
 	return(list("terminational_classes"=original_classes,"average_methylation_level"=end_mean))
 }
