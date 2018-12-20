@@ -165,7 +165,7 @@ MethyClass2Mean <- function(x){
 
 MethylCalculation <- function(original_classes,u,d,p,cell_cycle=1){
 	stopifnot(is.numeric(original_classes), is.vector(original_classes))
-	stopifnot(is.numeric(u), is.numeric(d), is.numeric(p), is.integer(cell_cycle))
+	stopifnot(is.numeric(u), is.numeric(d), is.numeric(p), is.numeric(cell_cycle))
 	if (u > 1||u < -1||d > 1||d < -1||p > 1||p < -1){
 		stop("The probablities shoud be a number in c(0,1)!\n\n")
 	}
