@@ -155,7 +155,7 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 #' The cost function was defined by \deqn{f_cost=\sum_{i=1,j=1}^{n=5} (o_{i,j}-x_{i,j})} and minimized using the Newton-Raphson method.
 #' @references .
 #' @examples # Let's start from a transtion matrix
-#' observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,
+#' observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0.0001,
 #'                                0.0497,0.5873,0.1887,0.0344,0.0149,
 #'                                0.0096,0.2381,0.4151,0.0653,0.0876,
 #'                                0.0019,0.0635,0.3396,0.6151,0.253,
@@ -171,11 +171,44 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 #'
 #' # The DNA methylation states change from original state to the terminational state after 30 cell cycle.
 #' ParameterEstimation(observation_matrix,iter=50,cell_cycle=30)
+#' @concept MethylTransition
 #' @export ParameterEstimation
 
 ParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
-	stopifnot(is.numeric(observation_matrix), is.matrix(observation_matrix))
 	stopifnot(is.numeric(iter), is.numeric(cell_cycle))
+	if (!is.matrix(observation_matrix)){
+		stop("The input observation transition ratio should be a matrix.")
+	}
+	if (!is.numeric(observation_matrix)){
+		stop("The input observation transition ratio should be numeric number.")
+	}
+	if (ncol(observation_matrix) != 5 | nrow(observation_matrix) != 5){
+		stop("The input transition matrix should be a \"5×5\" matrix.\n\n")
+	}
+	if (cell_cycle <= 0){
+		stop("Please selected a right number of cell cycles!\n\n")
+	}
+	if (iter <= 0){
+		stop("Please selected a right number of iteration!\n\n")
+	}
+	if(abs(sum(observation_matrix[,1])-1) >= 1e5){
+		warning("The total ratio of the 1st class(the coloum1) is not equal to 1, the estimation result may not accurate.")
+	}
+	if(abs(sum(observation_matrix[,2])-1) >= 1e5){
+		warning("The total ratio of the 2nd class(the coloum2) is not equal to 1, the estimation result may not accurate.")
+	}
+	if(abs(sum(observation_matrix[,3])-1) >= 1e5){
+		warning("The total ratio of the 3rd class(the coloum3) is not equal to 1, the estimation result may not accurate.")
+	}
+	if(abs(sum(observation_matrix[,4])-1) >= 1e5){
+		warning("The total ratio of the 4th class(the coloum4) is not equal to 1, the estimation result may not accurate.")
+	}
+	if(abs(sum(observation_matrix[,5])-1) >= 1e5){
+		warning("The total ratio of the 5th class(the coloum5) is not equal to 1, the estimation result may not accurate.")
+	}
+	if(sum(observation_matrix>1 | observation_matrix<0)>0){
+		warning("There are ratios that are not in the range of zero to one, the estimation result may not accurate.")
+	}
 	observe <- TransitionMatrixCellCycle(observation_matrix,cell_cycle)
 	para_maxtrix <- c()
 	cat("\n")

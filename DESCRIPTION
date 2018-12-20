@@ -4,12 +4,15 @@ Title: Estimated DNA Methylation Parameters and Calculate Methylation Classes af
 Version: 1.0.0
 Author: Chengchen Zhao
 Maintainer: Chengchen Zhao <cczhao@tongji.edu.cn>
+Depends: R (>= 3.1.0)
 Description: (the description of the model)
 	This packages contains two main functions: ParameterEstimation() and MethylCalculation().
 	ParameterEstimation() is a function to estimated the parameters that represent the probabilities of three active DNA methylation change types during n cell cycle(s).
 	MethylCalculation() is a function to calculate the ratio of each methylation class after n cell cycle(s).
-License: GPL-2
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: numDeriv,pracma
+Imports:
+	numDeriv (>= 0.2),
+	pracma (>= 2.2.2)
 RoxygenNote: 6.1.1

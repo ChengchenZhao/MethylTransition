@@ -161,6 +161,7 @@ MethyClass2Mean <- function(x){
 #' @examples MethylCalculation(original_classes,u,d,p)
 #' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=1)
 #' MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=10)
+#' @concept MethylTransition
 #' @export MethylCalculation
 
 MethylCalculation <- function(original_classes,u,d,p,cell_cycle=1){
@@ -168,6 +169,9 @@ MethylCalculation <- function(original_classes,u,d,p,cell_cycle=1){
 	stopifnot(is.numeric(u), is.numeric(d), is.numeric(p), is.numeric(cell_cycle))
 	if (u > 1||u < -1||d > 1||d < -1||p > 1||p < -1){
 		stop("The probablities shoud be a number in c(0,1)!\n\n")
+	}
+	if (cell_cycle <= 0){
+		stop("Please selected a right number of cell cycles!\n\n")
 	}
 	for (i in seq(cell_cycle)){
 		original_classes <- PredictionMethylationClass(original_classes,u,d,p)

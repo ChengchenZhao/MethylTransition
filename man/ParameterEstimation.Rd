@@ -99,7 +99,7 @@ The cost function was defined by \deqn{f_cost=\sum_{i=1,j=1}^{n=5} (o_{i,j}-x_{i
 }
 \examples{
 # Let's start from a transtion matrix
-observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0,
+observation_matrix <- matrix(c(0.9388,0.0952,0.0377,0,0.0001,
                                0.0497,0.5873,0.1887,0.0344,0.0149,
                                0.0096,0.2381,0.4151,0.0653,0.0876,
                                0.0019,0.0635,0.3396,0.6151,0.253,
@@ -119,3 +119,4 @@ ParameterEstimation(observation_matrix,iter=50,cell_cycle=30)
 \references{
 .
 }
+\concept{MethylTransition}

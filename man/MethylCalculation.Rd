@@ -101,3 +101,4 @@ MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=10)
 \references{
 .
 }
+\concept{MethylTransition}
