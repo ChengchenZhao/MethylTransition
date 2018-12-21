@@ -2,3 +2,5 @@
 
 export(MethylCalculation)
 export(ParameterEstimation)
+export(TMParameterEstimation)
+export(TransitionMatrixGeneration)

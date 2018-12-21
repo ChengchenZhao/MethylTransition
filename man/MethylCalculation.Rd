@@ -22,7 +22,7 @@ MethylCalculation(original_classes, u, d, p, cell_cycle = 1)
 \item{loops}{The loop times for the calculation}
 }
 \value{
-terminational_classes The terminational methylation classes
+terminal_classes The terminal methylation classes
 
 average_methylation_level The average methylation level after [n] cell cycle(s).
 }
@@ -60,11 +60,11 @@ The transition matrix after DNA replication would be :
  The observed transition matrix would be :
 	\tabular{cccccc}{
 		\tab original_class1(0) \tab original_class2(1/4) \tab original_class3(1/2) \tab original_class4(3/4) \tab original_class5(1)\cr
-		terminational_class1(0) \tab \eqn{x_{1,1}} \tab \eqn{x_{1,2}} \tab \eqn{x_{1,3}} \tab \eqn{x_{1,4}} \tab \eqn{x_{1,5}}\cr
-		terminational_class2(1/4) \tab \eqn{x_{2,1}} \tab \eqn{x_{2,2}} \tab \eqn{x_{2,3}} \tab \eqn{x_{2,4}} \tab \eqn{x_{2,5}}\cr
-		terminational_class3(1/2) \tab \eqn{x_{3,1}} \tab \eqn{x_{3,2}} \tab \eqn{x_{3,3}} \tab \eqn{x_{3,4}} \tab \eqn{x_{3,5}}\cr
-		terminational_class4(3/4) \tab \eqn{x_{4,1}} \tab \eqn{x_{4,2}} \tab \eqn{x_{4,3}} \tab \eqn{x_{4,4}} \tab \eqn{x_{4,5}}\cr
-		terminational_class5(1) \tab \eqn{x_{5,1}} \tab \eqn{x_{5,2}} \tab \eqn{x_{5,3}} \tab \eqn{x_{5,4}} \tab \eqn{x_{5,5}}\cr
+		terminal_class1(0) \tab \eqn{x_{1,1}} \tab \eqn{x_{1,2}} \tab \eqn{x_{1,3}} \tab \eqn{x_{1,4}} \tab \eqn{x_{1,5}}\cr
+		terminal_class2(1/4) \tab \eqn{x_{2,1}} \tab \eqn{x_{2,2}} \tab \eqn{x_{2,3}} \tab \eqn{x_{2,4}} \tab \eqn{x_{2,5}}\cr
+		terminal_class3(1/2) \tab \eqn{x_{3,1}} \tab \eqn{x_{3,2}} \tab \eqn{x_{3,3}} \tab \eqn{x_{3,4}} \tab \eqn{x_{3,5}}\cr
+		terminal_class4(3/4) \tab \eqn{x_{4,1}} \tab \eqn{x_{4,2}} \tab \eqn{x_{4,3}} \tab \eqn{x_{4,4}} \tab \eqn{x_{4,5}}\cr
+		terminal_class5(1) \tab \eqn{x_{5,1}} \tab \eqn{x_{5,2}} \tab \eqn{x_{5,3}} \tab \eqn{x_{5,4}} \tab \eqn{x_{5,5}}\cr
 	}
 	and \deqn{x_{1,1}=t_{1,1 }\times t_{1,1}}
 \deqn{x_{1,1}=t_{{,1},1 }\times t_{{,1},1}}
