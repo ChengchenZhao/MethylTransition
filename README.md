@@ -11,7 +11,7 @@ Install from GitHub :
 devtools::install_github("ChengchenZhao/MethylTransition")
 ```
 
-# Step by step guide
+# Guidance
 
 MethylTransition has two main functions,`ParameterEstimation()` and `MethylCalculation()`. `ParameterEstimation()` can be used to estimate the methylation change parameters using the initial and terminal DNA methylation states. `MethylCalculation()` can be used to calculate calculation the terminal proportion of each DNA methylation state using the initial DNA methylation states and a group of parameters. Here we show two examples of using these two functions.
 
