@@ -95,17 +95,14 @@ set.seed(0)
 original_methyl <- runif(10000, min = 0, max = 1)
 set.seed(1)
 terminal_methyl <- runif(10000, min = 0, max = 1)
-TransitionMatrixGeneration(original_methyl,terminal_methyl)
-ParameterEstimation(original_methyl,terminal_methyl)
-# The DNA methylation states change from original state to the terminal state after 1 cell cycle.
-ParameterEstimation(observation_matrix,iter=30,cell_cycle=1)
-# The DNA methylation states change from original state to the terminal state after 2 cell cycle.
-# ParameterEstimation(observation_matrix,iter=1,cell_cycle=2)
+# TransitionMatrixGeneration(original_methyl,terminal_methyl)
+# If this process goes through one cell cycle, we can set that "cell_cycle=1"
+ParameterEstimation(original_methyl,terminal_methyl,iter=30,cell_cycle=1)
+# If this process goes through two cell cycle, we then set that "cell_cycle=2"
+ParameterEstimation(original_methyl,terminal_methyl,iter=1,cell_cycle=2)
 # if this function was not successful to estimated the function, you may try more iterations with different initial guesses
-ParameterEstimation(observation_matrix,iter=50,cell_cycle=2)
+ParameterEstimation(original_methyl,terminal_methyl,iter=50,cell_cycle=2)
 
-# The DNA methylation states change from original state to the terminal state after 30 cell cycle.
-ParameterEstimation(observation_matrix,iter=50,cell_cycle=30)
 }
 \references{
 \cite{Zhao, C. et.al.(2018). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}

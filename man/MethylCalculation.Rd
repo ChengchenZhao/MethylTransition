@@ -16,10 +16,6 @@ MethylCalculation(original_classes, u, d, p, cell_cycle = 1)
 \item{p}{The paramater that describing the methylation probablity on semi-CpG site}
 
 \item{cell_cycle}{The cell cycle times}
-
-\item{total}{The total genes when do the calculation}
-
-\item{loops}{The loop times for the calculation}
 }
 \value{
 terminal_classes The terminal methylation classes
