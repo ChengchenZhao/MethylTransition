@@ -21,3 +21,6 @@ You can use this function by running
 ParameterEstimation(original_methyl, terminal_methyl, iter = 50, cell_cycle = 1)
 ```
 -**original_methyl** The original methylation level of each CpG/gene/region.
+-**terminal_methyl** The paired terminal methylation level of each CpG/gene/region.
+-**iter** The iteration times of the parameter estimation using the Newton-Raphson method with different initial guesses.
+-**cell_cycle** The cell cycle times from the original state to the terminal state.
