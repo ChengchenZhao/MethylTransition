@@ -117,6 +117,6 @@ TMParameterEstimation(observation_matrix,iter=50,cell_cycle=2)
 TMParameterEstimation(observation_matrix,iter=50,cell_cycle=30)
 }
 \references{
-\cite{Zhao, C. et.al.(2018). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
+\cite{Zhao, C. et.al.(2019). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
 }
 \concept{MethylTransition}

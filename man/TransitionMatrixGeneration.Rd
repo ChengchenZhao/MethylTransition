@@ -42,6 +42,6 @@ terminal_methyl <- runif(10000, min = 0, max = 1)
 TransitionMatrixGeneration(original_methyl,terminal_methyl)
 }
 \references{
-\cite{Zhao, C. et.al.(2018). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
+\cite{Zhao, C. et.al.(2019). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
 }
 \concept{MethylTransition}

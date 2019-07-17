@@ -95,6 +95,6 @@ MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=1)
 MethylCalculation(c(0.1,0.2,0.3,0.1,0.1),u=0.01,d=0.2,p=0.8,cell_cycle=10)
 }
 \references{
-\cite{Zhao, C. et.al.(2018). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
+\cite{Zhao, C. et.al.(2019). A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos. Under revision.}
 }
 \concept{MethylTransition}
