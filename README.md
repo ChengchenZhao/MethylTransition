@@ -70,3 +70,6 @@ MethylCalculation(c(0.1,0.2,0.3,0.1,0.1), u = 0.01, d = 0.2, p = 0.8, cell_cycle
 ```
 
 The output results would include the `terminal_classes` and the `average_methylation_level` of the terminal DNA methylation states.
+
+
+11111
