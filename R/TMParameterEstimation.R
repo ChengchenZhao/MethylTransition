@@ -228,7 +228,7 @@ TMParameterEstimation <- function(observation_matrix,iter=50,cell_cycle=1){
 	}else if(nrow(selected_parameter_matrix)==0){
 		stop(paste("TMParameterEstimation failed to estimated the parameters in ",iter," iterations. Please try more iterations with different initial guesses by choose a bigger 'iter'",sep=""))
 	}else{
-		cost_value <- round(apply(selected_parameter_matrix,1,CostFunction,observe),6)
+		cost_value <- round(apply(selected_parameter_matrix,1,CostFunction,observe),12)
 		optimal_para <- selected_parameter_matrix[which(cost_value==min(cost_value)),]
 		if (!is.null(nrow(optimal_para))){
 			selected_parameter <- round(apply(optimal_para,2,mean,na.rm=T),6)
