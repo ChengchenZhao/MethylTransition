@@ -1,13 +1,12 @@
 # MethylTransition overview
 
-MethylTransition is a R package for the parameter estimation of DNA methylation transition in cell mitosis. The transition matrix of this model describes the changes of DNA methylation during one cell cycle in three steps: passive demethylation by DNA replication, active DNA methylation changes affected by DNA methylation-modifying enzymes and DNA methylation combinations during homologous recombination. This model includes three parameters, *u*, *d* and *p*, to represent the probabilities of three active DNA methylation change types, and those parameters are estimated by minimizing a cost function using the Newton-Raphson method. For now, if you use this code, please cite Zhao, C. et.al.(2019). *A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos.* Under revision. 
-<!-- # [the manuscript](https://zhanglab.tongji.edu.cn).-->
+MethylTransition is a R package for characterizing the methylation changes during one or a few cell cycles at single cell resolution based on a DNA methylation state transition model. MethylTransition relies on the assumption that the changes of DNA methylation state at a CpG site across single cell cycle occur in three steps: passive demethylation during DNA replication, active DNA methylation changes affected by DNA methylation-modifying enzymes and DNA methylation states combination during the combination of non-sister chromatids. Therefor MethylTransition introduced a methylation state ratio vector, with 5 discrete states, to describe the overall pattern of DNA methylation states for a given cell. To link the two methylation state ratio vectors before and after a cell cycle, MethylTransition conducts a transition matrix comprised by 3 parameters, representing the possibility of DNA methylation maintenance (*u*), active demethylation (*d*) and *de novo* methylation separately (*p*), and it estimates the parameters by a matrix approximation strategy with the Newton-Raphson method. 
+<!-- # [Citation: If you use this code, please cite Zhao, C. et.al.(2020). *A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos.* Under revision. ](https://zhanglab.tongji.edu.cn).-->
 
 # Installation
 
-Install from GitHub :
 ```R
-# install.packages("devtools") # if devtools not be installed
+# install.packages("devtools") # run this commend if "devtools" is not installed
 devtools::install_github("ChengchenZhao/MethylTransition")
 ```
 
@@ -45,7 +44,7 @@ If this process goes through two cell cycle, we then set that "cell_cycle=2"
 ParameterEstimation(original_methyl, terminal_methyl, iter = 1, cell_cycle = 2)
 ```
 
-If this function was not successful to estimated the function, you may try more iterations with different initial guesses(increasing the parameter "iter").
+If this function was not successful to estimated the function, you may try more iterations with different initial guesses (by increasing the parameter "iter").
 ```R
 ParameterEstimation(original_methyl, terminal_methyl, iter = 50, cell_cycle = 2)
 ```
@@ -65,7 +64,7 @@ MethylCalculation(original_classes, u, d, p, cell_cycle = 1)
 - **cell_cycle** - The cell cycle times
 
 Next is a simple example.
-We first simulated a proportion of five cases of DNA methylation states at each CpG pair: Unmethylated (C1=0.1), Quarter-methylated (C2=0.2), Half-methylated (C3=0.3), Three-quarter-methylated (C4=0.1) and Fully-methylated (C5=0.1). Thus the `original_classes` would be `c(0.1,0.2,0.3,0.1,0.1)`. With a given group of parameters(*u*=0.01, *d*=0.2, *p*=0.8), the termial proportion of DNA methylation states can calculated by
+We first simulated a proportion of five cases of DNA methylation states at each CpG pair: Unmethylated (R<sub>S1</sub> = 0.1), Quarter-methylated (R<sub>S2</sub> = 0.2), Half-methylated (R<sub>S3</sub> = 0.3), Three-quarter-methylated (R<sub>S4</sub> = 0.1) and Fully-methylated (R<sub>S5</sub> = 0.1). Thus the `original_classes` would be `c(0.1,0.2,0.3,0.1,0.1)`. With a given group of parameters(*u*=0.01, *d*=0.2, *p*=0.8), the terminal proportion of DNA methylation states can be calculated by
 ```R
 MethylCalculation(c(0.1,0.2,0.3,0.1,0.1), u = 0.01, d = 0.2, p = 0.8, cell_cycle = 1)
 ```
