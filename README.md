@@ -64,7 +64,7 @@ MethylCalculation(original_classes, u, d, p, cell_cycle = 1)
 - **cell_cycle** - The cell cycle times
 
 Next is a simple example.
-We first simulated a proportion of five cases of DNA methylation states at each CpG pair: Unmethylated (R<sub>S1</sub> = 0.1), Quarter-methylated (R<sub>S2</sub> = 0.2), Half-methylated (R<sub>S3</sub> = 0.3), Three-quarter-methylated (R<sub>S4</sub> = 0.1) and Fully-methylated (R<sub>S5</sub> = 0.1). Thus the `original_classes` would be `c(0.1,0.2,0.3,0.1,0.1)`. With a given group of parameters(*u*=0.01, *d*=0.2, *p*=0.8), the terminal proportion of DNA methylation states can be calculated by
+We first simulated a proportion of five cases of DNA methylation states at each CpG pair: Unmethylated (Prop<sub>S1</sub> = 0.1), Quarter-methylated (Prop<sub>S2</sub> = 0.2), Half-methylated (Prop<sub>S3</sub> = 0.3), Three-quarter-methylated (Prop<sub>S4</sub> = 0.1) and Fully-methylated (Prop<sub>S5</sub> = 0.1). Thus the `original_classes` would be `c(0.1,0.2,0.3,0.1,0.1)`. With a given group of parameters (*u*=0.01, *d*=0.2, *p*=0.8), the terminal proportion of DNA methylation states can be calculated by
 ```R
 MethylCalculation(c(0.1,0.2,0.3,0.1,0.1), u = 0.01, d = 0.2, p = 0.8, cell_cycle = 1)
 ```
