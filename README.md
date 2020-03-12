@@ -1,6 +1,6 @@
 # MethylTransition overview
 
-MethylTransition is a R package for characterizing the methylation changes during one or a few cell cycles at single cell resolution based on a DNA methylation state transition model. MethylTransition relies on the assumption that the changes of DNA methylation state at a CpG site across single cell cycle occur in three steps: passive demethylation during DNA replication, active DNA methylation changes affected by DNA methylation-modifying enzymes and DNA methylation states combination during the combination of non-sister chromatids. Therefor MethylTransition introduced a methylation state ratio vector, with 5 discrete states, to describe the overall pattern of DNA methylation states for a given cell. To link the two methylation state ratio vectors before and after a cell cycle, MethylTransition conducts a transition matrix comprised by 3 parameters, representing the possibility of DNA methylation maintenance (*u*), active demethylation (*d*) and *de novo* methylation separately (*p*), and it estimates the parameters by a matrix approximation strategy with the Newton-Raphson method. 
+MethylTransition is an R package (>3.5) for characterizing the methylation change during one or a few cell cycles at single cell resolution based on a DNA methylation state transition model. MethylTransition relies on the assumption that the transition of DNA methylation state at a CpG site across single cell cycle occurs in three steps: passive demethylation during DNA replication, active DNA methylation transition affected by DNA methylation-modifying enzymes and DNA methylation states combination during the combination of non-sister chromatids. Therefore MethylTransition introduced a methylation state ratio vector, with 5 discrete states, to describe the overall pattern of DNA methylation states for a given cell. To link the two methylation state ratio vectors before and after a cell cycle, MethylTransition conducts a transition matrix comprised by 3 parameters, representing the possibility of DNA methylation maintenance (*u*), active demethylation (*d*) and *de novo* methylation separately (*p*), and it estimates the parameters by a matrix approximation strategy with the Newton-Raphson method. 
 <!-- # [Citation: If you use this code, please cite Zhao, C. et.al.(2020). *A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in pre-implantation embryos.* Under revision. ](https://zhanglab.tongji.edu.cn).-->
 
 # Installation
@@ -58,9 +58,9 @@ You can use this function by running
 MethylCalculation(original_classes, u, d, p, cell_cycle = 1)
 ```
 - **original_classes** - The original methylation classes
-- **u** - The paramater that describing the methylation probablity on CpG site
-- **d** - The paramater that describing the de-methylation probablity on 5mCpG site
-- **p** - The paramater that describing the methylation probablity on semi-CpG site
+- **u** - The parameter that describing the methylation probability on CpG site
+- **d** - The parameter that describing the de-methylation probability on 5mCpG site
+- **p** - The parameter that describing the methylation probability on semi-CpG site
 - **cell_cycle** - The cell cycle times
 
 Next is a simple example.
