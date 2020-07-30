@@ -13,6 +13,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports:
-	command,
-	numDeriv (>= 0.2)
+	numDeriv (>= 0.2),
+	expm
 RoxygenNote: 6.1.1

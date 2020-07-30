@@ -64,7 +64,6 @@ TransitionMatrixCellCycle <- function(observation_matrix,cell_cycle_times){
 	}else{
 		# suppressMessages(library(pracma))
 		# tmp <- expm(1/cell_cycle_times*logm(observation_matrix))
-
 		suppressMessages(library(expm))
 		tmp <- expm(1/cell_cycle_times*logm(observation_matrix,method="Eigen"))
 		return(as.vector(t(tmp)))
