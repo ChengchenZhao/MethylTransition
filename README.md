@@ -71,3 +71,6 @@ MethylCalculation(c(0.1,0.2,0.3,0.1,0.1), u = 0.01, d = 0.2, p = 0.8, cell_cycle
 ```
 
 The output results would include the `terminal_classes` and the `average_methylation_level` of the terminal DNA methylation states.
+
+# Citation
+Chengchen Zhao, Naiqian Zhang, Yalin Zhang, Nuermaimaiti Tuersunjiang, Shaorong Gao, Wenqiang Liu, and Yong Zhang. *A DNA methylation state transition model reveals the programmed epigenetic heterogeneity in human pre-implantation embryos*. Genome Biology 2020;21(1):277.
